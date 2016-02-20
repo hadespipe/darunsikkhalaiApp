@@ -95,105 +95,6 @@ class TimeTable: UIViewController {
         }
     }
     
-    func timeRetrive (completion: (objectId:String,time:String) -> Void){
-        var keepAlive = true
-        let test:PFQuery = PFQuery(className: "Time_FK")
-        test.limit = 1000
-        test.findObjectsInBackgroundWithBlock{(objects, error) -> Void in
-            
-            if error == nil
-            {
-                
-                if let objects = objects
-                {
-                    for object in objects{
-                        completion(objectId: object.objectId!, time: object["Time"] as! String)
-                        keepAlive = false
-                    }
-                }
-            }
-        }
-        
-        let runLoop = NSRunLoop.currentRunLoop()
-        while keepAlive && runLoop.runMode(NSDefaultRunLoopMode, beforeDate: NSDate(timeIntervalSinceNow: 0.1)) {
-            print("x")
-        }
-    }
-    
-    func topicRetrive (completion: (objectId:String,detail:String,subjectCodeId:String,topicName:String) -> Void){
-        var keepAlive = true
-        let test:PFQuery = PFQuery(className: "Topic")
-        test.limit = 1000
-        test.findObjectsInBackgroundWithBlock{(objects, error) -> Void in
-            
-            if error == nil
-            {
-                
-                if let objects = objects
-                {
-                    for object in objects{
-                        completion(objectId: object.objectId!, detail: object["Detail"] as! String, subjectCodeId: object["SubjectCode"].objectId!!, topicName: object["Topic_Name"] as! String)
-                        keepAlive = false
-                    }
-                }
-            }
-        }
-        
-        let runLoop = NSRunLoop.currentRunLoop()
-        while keepAlive && runLoop.runMode(NSDefaultRunLoopMode, beforeDate: NSDate(timeIntervalSinceNow: 0.1)) {
-            print("x")
-        }
-    }
-    func topicTeacherRetrive (completion: (objectId:String,teacherId:String,topicScheduleId:String) -> Void){
-        var keepAlive = true
-        let test:PFQuery = PFQuery(className: "Topic_Teacher")
-        test.limit = 1000
-        test.findObjectsInBackgroundWithBlock{(objects, error) -> Void in
-            
-            if error == nil
-            {
-                
-                if let objects = objects
-                {
-                    for object in objects{
-                        completion(objectId: object.objectId!, teacherId: object["Teacher"].objectId!! , topicScheduleId: object["TopicScheduleID"].objectId!! )
-                        keepAlive = false
-                    }
-                }
-            }
-        }
-        
-        let runLoop = NSRunLoop.currentRunLoop()
-        while keepAlive && runLoop.runMode(NSDefaultRunLoopMode, beforeDate: NSDate(timeIntervalSinceNow: 0.1)) {
-            print("x")
-        }
-    }
-    func topicScheduleRetrive (completion: (objectId:String,placeId:String,topicId:String,date:String,timeStartId:String,timeStopId:String,detail:String,tools:String) -> Void){
-        var keepAlive = true
-        let test:PFQuery = PFQuery(className: "Topic_Schedule")
-        test.limit = 1000
-        test.findObjectsInBackgroundWithBlock{(objects, error) -> Void in
-            
-            if error == nil
-            {
-                
-                if let objects = objects
-                {
-                    print(objects.capacity)
-                    for object in objects{
-                        completion(objectId: object.objectId!, placeId: object["Place"].objectId!!, topicId: object["TopicID"].objectId!!, date: object["Date"] as! String, timeStartId: object["Time_start"].objectId!!, timeStopId: object["Time_stop"].objectId!!, detail: object["Detail"] as! String, tools: object["Tools"] as! String
-                        )
-                        keepAlive = false
-                    }
-                }
-            }
-        }
-        
-        let runLoop = NSRunLoop.currentRunLoop()
-        while keepAlive && runLoop.runMode(NSDefaultRunLoopMode, beforeDate: NSDate(timeIntervalSinceNow: 0.1)) {
-            print("x")
-        }
-    }
     
     func checkApp (completion: (check:String) -> Void){
         var keepAlive = true
@@ -275,45 +176,10 @@ class TimeTable: UIViewController {
 //            print(check)
 //            self.checkApp = check
 //        }
-//        
-//        topicScheduleRetrive { (objectId, placeId, topicId, date, timeStartId, timeStopId, detail, tools) -> Void in
-//            print(objectId, placeId, topicId, date, timeStartId, timeStopId, detail, tools)
-//            
-//            let topicSchedule = PFObject(className: "Topic_Schedule")
-//            topicSchedule["objectId"] = objectId
-//            topicSchedule["Place"] = placeId
-//            topicSchedule["TopicID"] = topicId
-//            topicSchedule["Date"] = date
-//            topicSchedule["Time_start"] = timeStartId
-//            topicSchedule["Time_stop"] = timeStopId
-//            topicSchedule["Detail"] = detail
-//            topicSchedule["Tools"] = tools
-//            topicSchedule.pinInBackground()
-//            }
-//            
-//        }
+     
         
-//        timeRetrive { (objectId, time) -> Void in
-//            print(objectId, time)
-//            let timeTable = PFObject(className: "Time_FK")
-//            timeTable["objectId"] = objectId
-//            timeTable["Time"] = time
-//            timeTable.pinInBackground()
-//        }
         
-        checkLocal("Time_FK")
-        
-//        topicRetrive { (objectId, detail, subjectCodeId, topicName) -> Void in
-//            print(objectId, detail, subjectCodeId, topicName)
-//            let topic = PFObject(className: "Topic")
-//            topic["objectId"] = objectId
-//            topic["Detail"] = detail
-//            topic["SubjectCode"] = subjectCodeId
-//            topic["Topic_Name"] = topicName
-//            topic.pinInBackground()
-//        }
-        
-       
+
 //            let query = PFQuery(className: "Topic_Schedule")
 //            query.fromLocalDatastore()
 //            query.limit = 1000
@@ -464,186 +330,12 @@ class TimeTable: UIViewController {
         default :
             print("Error")
         }
-        
-       //เช็ควันที่ใน week นั้น
-        //var todayDate = NSDate()
-        //var thisWeek = getweekfromDate(todayDate) //ตัวแปรที่บอกค่า week ในรูปของ string ("W-yy")
-       // เริ่มจากหาว่าอาทิตย์นี้มีวันอะไรบ้าง
-      
-        
-       //เช็ค local datastore
-        //Local week
-//        let queryLocalWeek = PFQuery(className: "HT_Timestart")
-//        queryLocalWeek.fromLocalDatastore()
-//        queryLocalWeek.findObjectsInBackgroundWithBlock { (object, error) -> Void in
-//            if error == nil{
-//                if let objects = object{
-//                    print("success 1")
-//                    print(object)
-//                    for subject in objects{
-//                        print(subject)
-//                        print("success 2")
-//                    }
-//                }
-//            }else{
-//                print(error)
-//            }
-//        }
-        //HT_Timestart
-        
-        //HT_Timestop
-        
-        //HT_Place
-        
-        //HT_Topic_Subject_Class_Term
-        
-        //HT_Teacher
-        
+    
+    
         
     
         
-      /*
-        
-       //ดึงข้อมูลจาก parse ใน class Topic_Schedule ลงมา
-       let query = PFQuery(className: "Topic_Schedule")
-        query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in // ดึงข้อมูลจาก parse ถ้ามี error ก็ print
-            if error == nil{
-                if let object = objects{
-                    for object in object{
-                        //print(object)
-                        print(object.objectId)  //Optional String
-                        print(object["Time_start"].objectId)//Pointer
-                        print(object["Time_stop"]) //Pointer
-                        print(object["Date"])      //Date
-                        print(object["Place"])     //Pointer
-                       // print(object["Tools"]!)      //String
-                       // print(object["Detail"]!)    //String
-                        print(object["TopicID"])   //Pointer
-                        
-        //ใส่ข้อมูลลงตารางช่วย (local datastore)
-                        
-                       // objectId ลง local week
-                        let localWeek = PFObject(className: "Local week")
-                        localWeek["objectId"] = object.objectId! as String
-                        
-                        // Time_ID ลง HT_Timestart
-                        let ht_timestart = PFObject(className: "HT_Timestart")
-                        ht_timestart["objectId"] = object["Time_start"].objectId!! as String
-                        
-                        // Time_ID ลง HT_Timestop
-                        let ht_timestop = PFObject(className: "HT_Timestop")
-                        ht_timestop["objectId"] = object["Time_stop"].objectId!! as String
-                        
-                        // เก็บวันที่ ลง local week
-                        localWeek["Date"] = object["Date"] as! String
-                        
-                        // Place ลง HT_Place
-                        let ht_place = PFObject(className: "HT_Place")
-                        ht_place["objectId"] = object["Place"].objectId!! as String
-                        
-                        // Tools ลง local week
-                        localWeek["Tools"] = object["Tools"]  as! String
-
-                        
-                        // Detail ลง local week
-                        localWeek["Detail"] = object["Detail"]  as! String
-
-                        
-                        // TopicID(Topic) ลง HT_Topic_Subject_Class_Term
-                        let ht_topic_subject_class = PFObject(className: "HT_Topic_Subject_Class_Term")
-                        ht_topic_subject_class["objectId"] = object["TopicID"].objectId!!  as String
-
-                       
-                    }
-                }
-            }else{
-                print("error")
-            }
-        }*/
-        /*
-        // ดึง class Time ลงมาใส่ HT_Timestart และ HT_timestop มี id, no_time, time
-            let timeQuery = PFQuery(className: "Time_FK") // เปิด time บน parse
-            timeQuery.findObjectsInBackgroundWithBlock { (object, error) -> Void in
-                if error == nil{
-                    if let objects = object{
-                        for time in objects{
-                            var timeId = time.objectId! as String      //เปิด timeId
-                            var timeString = time["Time"] as! String   //เปิด time ที่เป็น String Ex. 9.00
-                            //HT_Timestart
-                            let timestartQuery = PFQuery(className: "HT_Timestart")
-                            timestartQuery.fromLocalDatastore()
-                            timestartQuery.findObjectsInBackgroundWithBlock { (object, error) -> Void in
-                                if error == nil{
-                                    if let objects = object{
-                                        for timestart in objects{
-                                            if timestart["objectId"] as! String == timeId{ //ถ้า objectId ใน HT_Timestart ตรงกับ objectId บน Time_Fk
-                                                timestart["Time"] = timeString //ให้ object นั้นเก็บค่า time ที่เป็น string เช่น มี objectId: 78j3scs9 เก็บค่า 9.00
-                                            }
-                                        }
-                                    }
-                                }else{
-                                    print(error)
-                                }
-                            }// จบ timestartQuery ตรงนี้
-                            //HT_Timestop
-                            let timestopQuery = PFQuery(className: "HT_Timestop")
-                            timestopQuery.fromLocalDatastore()
-                            timestopQuery.findObjectsInBackgroundWithBlock { (object, error) -> Void in
-                                if error == nil{
-                                    if let objects = object{
-                                        for timestop in objects{
-                                            if timestop["objectId"] as! String == timeId{ //ถ้า objectId ใน HT_Timestop ตรงกับ objectId บน Time_Fk
-                                                timestop["Time"] = timeString //ให้ object นั้นเก็บค่า time ที่เป็น string เช่น มี objectId: 78j3scs9 เก็บค่า 9.00
-                                            }
-                                        }
-                                    }
-
-                                }else{
-                                    print(error)
-                                }
-                                
-                            }
-                        }
-                    }
-                }else{
-                    print(error)
-                }
-        }
-        */
-        // ดึง class Place ลงมาใส่ HT_Place มี id, no_place, place_name
-        
-        // ดึง class topic ลงมาใส่ HT_Topic_Subject_Class_Term มี id, detail, subjectCode, TopicName
-        
-        // ดึง class subject ลงมาใส่ HT_Topic_Subject_Class_Term มี id, class, info, subject, term
-        
-        // ดึง class term ลงมาใส่ HT_Topic_Subject_Class_Term มี id, no_term, term
-        
-        // ดึง class class ลงมาใส่ มี id, class, no_class, num_class
-        
-        // ดึง class topic_teacher ลงมาใส่ HT_Teacher มี id, teacher, topicScheduleId
-        
-        // ดึง class teacher(USER) ลงมาใส่ HT_Teacher มี id, namelist, email verify, ...
-        
-        
-        
-
-        
-        //เติมข้อมูลตารางหลัก n อัน เมื่อ n คือจำนวนสัปดาห์
-        
-        
-        
-//        let queryTest = PFQuery(className: "Topic_Schedule")
-//        queryTest.whereKey("objectId", equalTo: "5555555")
-//        queryTest.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
-//            if objects == nil{
-//                print("คาบว่าง")
-//            }else if error == nil{
-//                print("error == nil")
-//                print(objects)
-//            }else{
-//                print("error")
-//            }
-//        }
+     
         
         
         
@@ -659,72 +351,10 @@ class TimeTable: UIViewController {
 
 
 
-//        let test = PFObject(className: "datastore")
-//        test["Data"] = "3"
-//        test["Name"] = "ออม"
-//        test["Status"] = "เหมียว"
-//        //test.saveEventually()
-//        test.pinInBackground()
-//        print("good")
-
-//
-//        let query = PFQuery(className: "datastore")
-//        query.fromLocalDatastore()
-//        query.whereKey("Status", equalTo: "อ้วน")
-//        query.getFirstObjectInBackgroundWithBlock { (object, error) -> Void in
-//            if error == nil{
-//                if let status = object{
-//                    print(status["Status"])
-//                    print(status)
-//                }
-//            }
-//        }
 
 
 
-//        let datastore = PFObject(className: "datastore")
-//        datastore.unpinInBackgroundWithName("ออม")
-//
-//        let query = PFQuery(className: "datastore")
-//        query.fromLocalDatastore()
-//        query.findObjectsInBackgroundWithBlock { (object, error) -> Void in
-//            if error == nil{
-//                if let object = object {
-//                    //print(object)
-//                    for i in object{
-//                       // print(i)
-//                        let aom = i["Name"] as! String
-//                        print(i["Status"])
-//                        print(i["Said"][0])
-//                        let data = i["Data"] as! String
-//                        print("\(aom) and \(data)")
-//
-//                    }
-//                }
-//            }else{
-//                print("error")
-//            }
-//        }
 
-
-
-//        var i = 1
-//        let queryTest = PFQuery(className: "Topic_Teacher")
-//        queryTest.findObjectsInBackgroundWithBlock { (object, error) -> Void in
-//            if error == nil{
-//                if let objects = object{
-//                    for object in objects{
-//                        print(object)
-//                        print(i)
-//                        i++
-//                    }
-//
-//                }
-//            }else{
-//                print("error")
-//            }
-//        }
-//        print("finish")
 
 //        let query = PFQuery(className: "HT_Place")
 //        query.fromLocalDatastore()
@@ -744,28 +374,8 @@ class TimeTable: UIViewController {
 
 
 
-//        let test = PFObject(className: "test")
-//        test.addObject(["hello"], forKey: "day")
-//        test.pinInBackground()
-//          let query = PFQuery(className: "test")
-//        query.fromLocalDatastore()
-//        query.findObjectsInBackgroundWithBlock { (object, error) -> Void in
-//            if  error == nil{
-//                                        if let objects = object{
-//                                           // print(objects)
-//                                            for i in objects{
-//                                                print(i)
-//                                               i.unpinInBackground()
-//                                            }
-//                                                                                    }
-//                                    }else{
-//                                        print("error")
-//                                    }
-//
-//        }
 
-
-//
+//คาบว่าง
 //                let query = PFQuery(className: "HT_Place")
 //                query.fromLocalDatastore()
 //                query.whereKey("No_place", equalTo: 1)
@@ -826,5 +436,292 @@ func getweek(date:String)->String{
     let NSDate = getStringtoDate(date)
     let result = getweekfromDate(NSDate)
     return result
+}
+
+///---------------เก็บค่าจาก parse ลง local------------------
+//        termRetrive { (objectId, noTerm, term) -> Void in
+//            print(objectId, noTerm, term)
+//            let termTable = PFObject(className: "Term_FK")
+//            termTable["objectId"] = objectId
+//            termTable["No_term"] = noTerm
+//            termTable["Term"] = term
+//            termTable.pinInBackground()
+//        }
+//        timeRetrive { (objectId, time) -> Void in
+//            print(objectId, time)
+//            let timeTable = PFObject(className: "Time_FK")
+//            timeTable["objectId"] = objectId
+//            timeTable["Time"] = time
+//            timeTable.pinInBackground()
+//        }
+//        subjectRetrive { (objectId, classId, info, subject, termId) -> Void in
+//            print(objectId, classId, info, subject, termId)
+//            let subTable = PFObject(className: "Subject")
+//            subTable["objectId"] = objectId
+//            subTable["Class"] = classId
+//            subTable["Info"] = info
+//            subTable["Subject"] = subject
+//            subTable["Term"] = termId
+//            subTable.pinInBackground()
+//        }
+//        placeRetrive { (objectId, noPlace, place) -> Void in
+//            print(objectId, noPlace, place)
+//            let placeTable = PFObject(className: "Place_FK")
+//            placeTable["objectId"] = objectId
+//            placeTable["No_place"] = noPlace
+//            placeTable["Place_name"] = place
+//            placeTable.pinInBackground()
+//        }
+//        userRetrive { (objectId, namelist, classId, email) -> Void in
+//            print(objectId, namelist, classId, email)
+//            let userTable = PFObject(className: "User")
+//            userTable["objectId"] = objectId
+//            userTable["namelist"] = namelist
+//            userTable["class"] = classId
+//            userTable["email"] = email
+//            userTable.pinInBackground()
+//        }
+//        classRetrive { (objectId, classId, noClass) -> Void in
+//            print(objectId, classId, noClass)
+//            let classTable = PFObject(className: "Class_FK")
+//            classTable["objectId"] = objectId
+//            classTable["Class"] = classId
+//            classTable["No_class"] = noClass
+//            classTable.pinInBackground()
+//        }
+//        topicRetrive { (objectId, detail, subjectCodeId, topicName) -> Void in
+//            print(objectId, detail, subjectCodeId, topicName)
+//            let topic = PFObject(className: "Topic")
+//            topic["objectId"] = objectId
+//            topic["Detail"] = detail
+//            topic["SubjectCode"] = subjectCodeId
+//            topic["Topic_Name"] = topicName
+//            topic.pinInBackground()
+//        }
+//------------------------------------------
+func timeRetrive (completion: (objectId:String,time:String) -> Void){
+    var keepAlive = true
+    let test:PFQuery = PFQuery(className: "Time_FK")
+    test.limit = 1000
+    test.findObjectsInBackgroundWithBlock{(objects, error) -> Void in
+        
+        if error == nil
+        {
+            
+            if let objects = objects
+            {
+                for object in objects{
+                    completion(objectId: object.objectId!, time: object["Time"] as! String)
+                    keepAlive = false
+                }
+            }
+        }
+    }
+    
+    let runLoop = NSRunLoop.currentRunLoop()
+    while keepAlive && runLoop.runMode(NSDefaultRunLoopMode, beforeDate: NSDate(timeIntervalSinceNow: 0.1)) {
+        print("x")
+    }
+}
+
+
+func termRetrive (completion: (objectId:String,noTerm:Int,term:String) -> Void){
+    var keepAlive = true
+    let test:PFQuery = PFQuery(className: "Term_FK")
+    test.limit = 1000
+    test.findObjectsInBackgroundWithBlock{(objects, error) -> Void in
+        
+        if error == nil
+        {
+            
+            if let objects = objects
+            {
+                for object in objects{
+                    completion(objectId: object.objectId!, noTerm: object["No_term"] as! Int, term: object["Term"] as! String)
+                    keepAlive = false
+                }
+            }
+        }
+    }
+    
+    let runLoop = NSRunLoop.currentRunLoop()
+    while keepAlive && runLoop.runMode(NSDefaultRunLoopMode, beforeDate: NSDate(timeIntervalSinceNow: 0.1)) {
+        print("x")
+    }
+}
+
+func subjectRetrive (completion: (objectId:String,classId:String,info:String,subject:Int,termId:String) -> Void){
+    var keepAlive = true
+    let test:PFQuery = PFQuery(className: "Subject")
+    test.limit = 1000
+    test.findObjectsInBackgroundWithBlock{(objects, error) -> Void in
+        
+        if error == nil
+        {
+            
+            if let objects = objects
+            {
+                for object in objects{
+                    completion(objectId: object.objectId!, classId: object["Class"].objectId!!, info: object["Info"] as! String, subject: object["Subject"] as! Int, termId: object["Term"].objectId!!)
+                    keepAlive = false
+                }
+            }
+        }
+    }
+    
+    let runLoop = NSRunLoop.currentRunLoop()
+    while keepAlive && runLoop.runMode(NSDefaultRunLoopMode, beforeDate: NSDate(timeIntervalSinceNow: 0.1)) {
+        print("x")
+    }
+}
+
+func topicRetrive (completion: (objectId:String,detail:String,subjectCodeId:String,topicName:String) -> Void){
+    var keepAlive = true
+    let test:PFQuery = PFQuery(className: "Topic")
+    test.limit = 1000
+    test.findObjectsInBackgroundWithBlock{(objects, error) -> Void in
+        
+        if error == nil
+        {
+            
+            if let objects = objects
+            {
+                for object in objects{
+                    completion(objectId: object.objectId!, detail: object["Detail"] as! String, subjectCodeId: object["SubjectCode"].objectId!!, topicName: object["Topic_Name"] as! String)
+                    keepAlive = false
+                }
+            }
+        }
+    }
+    
+    let runLoop = NSRunLoop.currentRunLoop()
+    while keepAlive && runLoop.runMode(NSDefaultRunLoopMode, beforeDate: NSDate(timeIntervalSinceNow: 0.1)) {
+        print("x")
+    }
+}
+func topicTeacherRetrive (completion: (objectId:String,teacherId:String,topicScheduleId:String) -> Void){
+    var keepAlive = true
+    let test:PFQuery = PFQuery(className: "Topic_Teacher")
+    test.limit = 1000
+    test.findObjectsInBackgroundWithBlock{(objects, error) -> Void in
+        
+        if error == nil
+        {
+            
+            if let objects = objects
+            {
+                for object in objects{
+                    completion(objectId: object.objectId!, teacherId: object["Teacher"].objectId!! , topicScheduleId: object["TopicScheduleID"].objectId!! )
+                    keepAlive = false
+                }
+            }
+        }
+    }
+    
+    let runLoop = NSRunLoop.currentRunLoop()
+    while keepAlive && runLoop.runMode(NSDefaultRunLoopMode, beforeDate: NSDate(timeIntervalSinceNow: 0.1)) {
+        print("x")
+    }
+}
+func placeRetrive (completion: (objectId:String, noPlace:Int, place:String) -> Void){
+    var keepAlive = true
+    let test:PFQuery = PFQuery(className: "Place_FK")
+    test.limit = 1000
+    test.findObjectsInBackgroundWithBlock{(objects, error) -> Void in
+        
+        if error == nil
+        {
+            
+            if let objects = objects
+            {
+                for object in objects{
+                    completion(objectId: object.objectId!, noPlace: object["No_place"] as! Int, place: object["Place_name"] as! String)
+                    keepAlive = false
+                }
+            }
+        }
+    }
+    
+    let runLoop = NSRunLoop.currentRunLoop()
+    while keepAlive && runLoop.runMode(NSDefaultRunLoopMode, beforeDate: NSDate(timeIntervalSinceNow: 0.1)) {
+        print("x")
+    }
+}
+func classRetrive (completion: (objectId:String, classId:String, noClass: Int) -> Void){
+    var keepAlive = true
+    let test:PFQuery = PFQuery(className: "Class_FK")
+    test.limit = 1000
+    test.findObjectsInBackgroundWithBlock{(objects, error) -> Void in
+        
+        if error == nil
+        {
+            
+            if let objects = objects
+            {
+                for object in objects{
+                    completion(objectId: object.objectId!, classId: object["Class"] as! String, noClass: object["No_class"] as! Int)
+                    keepAlive = false
+                }
+            }
+        }
+    }
+    
+    let runLoop = NSRunLoop.currentRunLoop()
+    while keepAlive && runLoop.runMode(NSDefaultRunLoopMode, beforeDate: NSDate(timeIntervalSinceNow: 0.1)) {
+        print("x")
+    }
+}
+
+func topicScheduleRetrive (completion: (objectId:String,placeId:String,topicId:String,date:String,timeStartId:String,timeStopId:String,detail:String,tools:String) -> Void){
+    var keepAlive = true
+    let test:PFQuery = PFQuery(className: "Topic_Schedule")
+    test.limit = 1000
+    test.findObjectsInBackgroundWithBlock{(objects, error) -> Void in
+        
+        if error == nil
+        {
+            
+            if let objects = objects
+            {
+                print(objects.capacity)
+                for object in objects{
+                    completion(objectId: object.objectId!, placeId: object["Place"].objectId!!, topicId: object["TopicID"].objectId!!, date: object["Date"] as! String, timeStartId: object["Time_start"].objectId!!, timeStopId: object["Time_stop"].objectId!!, detail: object["Detail"] as! String, tools: object["Tools"] as! String
+                    )
+                    keepAlive = false
+                }
+            }
+        }
+    }
+    
+    let runLoop = NSRunLoop.currentRunLoop()
+    while keepAlive && runLoop.runMode(NSDefaultRunLoopMode, beforeDate: NSDate(timeIntervalSinceNow: 0.1)) {
+        print("x")
+    }
+}
+
+func userRetrive (completion: (objectId:String,namelist:String,classId:String,email:String) -> Void){
+    var keepAlive = true
+    let test:PFQuery = PFUser.query()!
+    test.limit = 1000
+    test.findObjectsInBackgroundWithBlock{(objects, error) -> Void in
+        
+        if error == nil
+        {
+            
+            if let objects = objects
+            {
+                print(objects.capacity)
+                for object in objects{
+                    completion(objectId: object.objectId!, namelist: object["namelist"] as! String, classId: object["class"].objectId!!, email: object["email"] as! String)
+                    keepAlive = false
+                }
+            }
+        }
+    }
+    
+    let runLoop = NSRunLoop.currentRunLoop()
+    while keepAlive && runLoop.runMode(NSDefaultRunLoopMode, beforeDate: NSDate(timeIntervalSinceNow: 0.1)) {
+        print("x")
+    }
 }
 
