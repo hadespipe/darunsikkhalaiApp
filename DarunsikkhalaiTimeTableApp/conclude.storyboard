@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--conclude-->
+        <scene sceneID="WD1-qQ-vFz">
+            <objects>
+                <viewController restorationIdentifier="conclude" storyboardIdentifier="conclude" title="conclude" id="Vnu-mo-FWa" customClass="conclude" customModule="DarunsikkhalaiTimeTableApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="EeS-5F-LyF"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ffv-9d-krZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="P3d-ct-gce">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3NW-uu-SOV" userLabel="status bar">
+                                <rect key="frame" x="0.0" y="33" width="600" height="42"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="สรุปรวม" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MoJ-ZR-HNK">
+                                        <rect key="frame" x="241" y="6" width="118" height="29"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="118" id="v4O-Up-fyY"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.58545344109999997" green="0.95028379770000004" blue="0.80376556570000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="MoJ-ZR-HNK" firstAttribute="bottom" secondItem="3NW-uu-SOV" secondAttribute="bottomMargin" constant="1" id="Ox1-2c-b44"/>
+                                    <constraint firstAttribute="height" constant="42" id="Tkg-gq-FCn"/>
+                                    <constraint firstItem="MoJ-ZR-HNK" firstAttribute="top" secondItem="3NW-uu-SOV" secondAttribute="topMargin" constant="-2" id="cf2-bR-Jex"/>
+                                    <constraint firstItem="MoJ-ZR-HNK" firstAttribute="centerX" secondItem="3NW-uu-SOV" secondAttribute="centerX" id="lKH-SN-5Ys"/>
+                                </constraints>
+                            </view>
+                            <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zYI-38-3LK">
+                                <rect key="frame" x="0.0" y="551" width="600" height="49"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <items>
+                                    <tabBarItem systemItem="more" id="hto-nl-mqk"/>
+                                    <tabBarItem systemItem="favorites" id="HsD-g4-Sob"/>
+                                    <tabBarItem systemItem="favorites" id="SGn-W2-yeq"/>
+                                    <tabBarItem systemItem="favorites" id="1Qt-es-AEF"/>
+                                    <tabBarItem systemItem="favorites" id="IhJ-y4-C3x"/>
+                                    <tabBarItem systemItem="favorites" id="fJj-2a-CBz"/>
+                                </items>
+                            </tabBar>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ycc-bs-zMT">
+                                <rect key="frame" x="0.0" y="74" width="600" height="477"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="3NW-uu-SOV" firstAttribute="top" secondItem="EeS-5F-LyF" secondAttribute="bottom" constant="13" id="c8K-Pb-uTR"/>
+                            <constraint firstItem="3NW-uu-SOV" firstAttribute="leading" secondItem="P3d-ct-gce" secondAttribute="leading" id="dDN-Na-Bnh"/>
+                            <constraint firstAttribute="trailing" secondItem="3NW-uu-SOV" secondAttribute="trailing" id="x5t-sD-uEY"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="axh-5D-ICj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2201" y="-43"/>
+        </scene>
+    </scenes>
+</document>

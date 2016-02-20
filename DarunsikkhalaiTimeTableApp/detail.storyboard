@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--detail-->
+        <scene sceneID="p73-t4-Zww">
+            <objects>
+                <viewController storyboardIdentifier="detail" title="detail" id="L2j-YF-qWK" customClass="detail" customModule="DarunsikkhalaiTimeTableApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wIg-Nr-aHC"/>
+                        <viewControllerLayoutGuide type="bottom" id="v4d-AZ-te6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="djD-qK-L4L">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wEu-47-rtd" userLabel="status bar">
+                                <rect key="frame" x="0.0" y="33" width="600" height="42"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="รายละเอียด" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SI1-Qv-wpa">
+                                        <rect key="frame" x="241" y="8" width="118" height="26"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="118" id="rwx-gC-gt1"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.58545344109999997" green="0.95028379770000004" blue="0.80376556570000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="SI1-Qv-wpa" firstAttribute="top" secondItem="wEu-47-rtd" secondAttribute="topMargin" id="4Ic-oE-C87"/>
+                                    <constraint firstAttribute="height" constant="42" id="7Xu-ER-VtY"/>
+                                    <constraint firstItem="SI1-Qv-wpa" firstAttribute="bottom" secondItem="wEu-47-rtd" secondAttribute="bottomMargin" id="Ur4-Ge-o2p"/>
+                                    <constraint firstItem="SI1-Qv-wpa" firstAttribute="centerX" secondItem="wEu-47-rtd" secondAttribute="centerX" id="ra8-np-Wr5"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="7Xu-ER-VtY"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                            <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tli-e8-eS2">
+                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="49"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <items>
+                                    <tabBarItem systemItem="more" id="38o-ZL-fQp"/>
+                                    <tabBarItem systemItem="favorites" id="gch-I9-gBX"/>
+                                    <tabBarItem systemItem="favorites" id="IvK-tG-tSH"/>
+                                    <tabBarItem systemItem="favorites" id="65K-zr-VPC"/>
+                                    <tabBarItem systemItem="favorites" id="V2U-KD-ElY"/>
+                                    <tabBarItem systemItem="favorites" id="kH7-tE-kXj"/>
+                                </items>
+                            </tabBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="wEu-47-rtd" firstAttribute="top" secondItem="wIg-Nr-aHC" secondAttribute="bottom" constant="13" id="45H-we-vfg"/>
+                            <constraint firstItem="wEu-47-rtd" firstAttribute="centerY" secondItem="djD-qK-L4L" secondAttribute="centerY" id="EQB-V5-Kd7"/>
+                            <constraint firstItem="wEu-47-rtd" firstAttribute="top" secondItem="wIg-Nr-aHC" secondAttribute="bottom" constant="13" id="H73-fd-dlq"/>
+                            <constraint firstItem="tli-e8-eS2" firstAttribute="top" secondItem="djD-qK-L4L" secondAttribute="top" id="PUB-yU-cWG"/>
+                            <constraint firstItem="wEu-47-rtd" firstAttribute="leading" secondItem="djD-qK-L4L" secondAttribute="leading" id="QhP-AO-LR8"/>
+                            <constraint firstItem="v4d-AZ-te6" firstAttribute="top" secondItem="wEu-47-rtd" secondAttribute="bottom" constant="525" id="SjA-hH-88A"/>
+                            <constraint firstItem="wEu-47-rtd" firstAttribute="centerX" secondItem="djD-qK-L4L" secondAttribute="centerX" id="So8-Ht-e7o"/>
+                            <constraint firstItem="wEu-47-rtd" firstAttribute="leading" secondItem="tli-e8-eS2" secondAttribute="trailing" id="cyD-H4-nGP"/>
+                            <constraint firstItem="wEu-47-rtd" firstAttribute="leading" secondItem="tli-e8-eS2" secondAttribute="leading" id="q8A-Gr-jzG"/>
+                            <constraint firstAttribute="trailing" secondItem="wEu-47-rtd" secondAttribute="trailing" id="rJO-0c-dTQ"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="H73-fd-dlq"/>
+                                <exclude reference="EQB-V5-Kd7"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Oas-an-0lO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1547" y="-43"/>
+        </scene>
+    </scenes>
+</document>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--history-->
+        <scene sceneID="y5a-QT-YJQ">
+            <objects>
+                <viewController restorationIdentifier="history" storyboardIdentifier="history" title="history" id="l7q-6C-4ah" customClass="history" customModule="DarunsikkhalaiTimeTableApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ivS-Cb-qby"/>
+                        <viewControllerLayoutGuide type="bottom" id="SGZ-Pd-5MH"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="EB5-bk-nEJ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jxZ-I5-cFa" userLabel="status bar">
+                                <rect key="frame" x="0.0" y="38" width="600" height="42"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ประวัติการแก้ไข" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ydn-Nq-AE8">
+                                        <rect key="frame" x="222" y="6" width="156" height="29"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="156" id="Tyt-zx-Vp0"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.58545344109999997" green="0.95028379770000004" blue="0.80376556570000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="Ydn-Nq-AE8" firstAttribute="top" secondItem="jxZ-I5-cFa" secondAttribute="topMargin" constant="-2" id="6FW-7l-JXU"/>
+                                    <constraint firstItem="Ydn-Nq-AE8" firstAttribute="bottom" secondItem="jxZ-I5-cFa" secondAttribute="bottomMargin" constant="1" id="JFd-Ox-l2x"/>
+                                    <constraint firstItem="Ydn-Nq-AE8" firstAttribute="centerX" secondItem="jxZ-I5-cFa" secondAttribute="centerX" id="MHF-vh-dzL"/>
+                                    <constraint firstAttribute="height" constant="42" id="UlS-3b-CQB"/>
+                                </constraints>
+                            </view>
+                            <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RIL-jS-6Np">
+                                <rect key="frame" x="0.0" y="551" width="600" height="49"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <items>
+                                    <tabBarItem systemItem="more" id="S6h-Kr-Bvs"/>
+                                    <tabBarItem systemItem="favorites" id="0Uy-HB-P4A"/>
+                                    <tabBarItem systemItem="favorites" id="V2l-Uh-5iz"/>
+                                    <tabBarItem systemItem="favorites" id="zFf-i7-ubn"/>
+                                    <tabBarItem systemItem="favorites" id="tTV-vX-0nR"/>
+                                    <tabBarItem systemItem="favorites" id="OAZ-hf-6AA"/>
+                                </items>
+                            </tabBar>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mqo-9b-nUq">
+                                <rect key="frame" x="0.0" y="79" width="600" height="472"/>
+                                <color key="backgroundColor" red="1" green="0.57926414260000003" blue="0.78202130569999995" alpha="1" colorSpace="calibratedRGB"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="jxZ-I5-cFa" firstAttribute="top" secondItem="ivS-Cb-qby" secondAttribute="bottom" constant="18" id="Js0-ah-ye3"/>
+                            <constraint firstItem="jxZ-I5-cFa" firstAttribute="leading" secondItem="EB5-bk-nEJ" secondAttribute="leading" id="h2Q-dx-wYr"/>
+                            <constraint firstAttribute="trailing" secondItem="jxZ-I5-cFa" secondAttribute="trailing" id="uNI-qN-nIu"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OT7-dU-G65" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2820" y="-48"/>
+        </scene>
+    </scenes>
+</document>
