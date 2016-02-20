@@ -58,16 +58,37 @@ class TimeTable: UIViewController {
     var count = 0 // สำหรับเปลี่ยนสัปดาห์
     
     override func viewWillAppear(animated: Bool) {
-
+        let user = PFUser.currentUser()
+        print(user)
+        
+        
+        
+        let day:[String] = [mondayDate.text!,tuesdayDate.text!,wednesdayDate.text!,thursdayDate.text!,fridayDate.text!]
+        print(mondayDate.text)
+        //การเปิดตารางเรียน
+        //โชว์คาบ
+        let subject = PFQuery(className: "Topic_Schedule")
+        subject.fromLocalDatastore()
+        subject.whereKey("Date", containedIn: day)
+        subject.findObjectsInBackgroundWithBlock { (object, error) -> Void in
+            if error == nil{
+                if let objects = object{
+                    for object in objects{
+                        print(object)
+                    }
+                }
+            }else{
+                print(error)
+            }
+        }
+        //โชว์อาจารย์
     }
   
     
     var subjectTest = String()
     
-        
-
-
     
+
     
     func test (completion: (classid:String, info:String) -> Void){
         var keepAlive = true
@@ -149,7 +170,7 @@ class TimeTable: UIViewController {
         query.findObjectsInBackgroundWithBlock { (object, error) -> Void in
             if error == nil{
                 if let objects = object{
-                    print("object capa is \(objects.capacity)")
+                    print("object capacity is \(objects.capacity)")
                     for object in objects{
                         print(object)
                     }
@@ -171,15 +192,21 @@ class TimeTable: UIViewController {
     override func viewDidLoad() {  // <-- func นี้สำหรับ code ที่ต้องการให้ run เมื่อเปิดหน้านี้
 
         super.viewDidLoad()
+       
+    
+        
+        
+        
+        
+        
+        
+        
         // สำหรับการเช็คว่า เราเคยเก็บค่าต่างๆ ใส่เครื่องหรือยัง
 //                checkApp { (check) -> Void in
 //            print(check)
 //            self.checkApp = check
 //        }
-     
-        
-        
-
+// ลบตาราง
 //            let query = PFQuery(className: "Topic_Schedule")
 //            query.fromLocalDatastore()
 //            query.limit = 1000
@@ -228,15 +255,8 @@ class TimeTable: UIViewController {
 //        if checkPoint == 0{
 //            
 //        }
-        //ไว้เก็บตาราง topic_techer
-//        topicTeacherRetrive { (objectId, teacherId, topicScheduleId) -> Void in
-//            print(objectId, teacherId, topicScheduleId)
-//            let topicTeacher = PFObject(className: "Topic_Teacher")
-//            topicTeacher["objectId"] = objectId
-//            topicTeacher["Teacher"] = teacherId
-//            topicTeacher["TopicScheduleID"] = topicScheduleId
-//            topicTeacher.pinInBackground()
-//        }
+        
+
         
         
         
@@ -248,31 +268,8 @@ class TimeTable: UIViewController {
         
         
        
-//        testQuery { (result) -> Void in
-//            print(result)
-//            self.subjectTest = result
-//            self.array.append(result)
-//            
-//        }
-//        print("a")
-//        print(subjectTest)
-//        print(array)
-        
-//        let subTest = PFObject(className: "subTest")
-//        subTest["info"] = array
-//        subTest.pinInBackground()
-//        
-//        let query = PFQuery(className: "subTest")
-//        query.fromLocalDatastore()
-//        query.findObjectsInBackgroundWithBlock { (object, error) -> Void in
-//            if error == nil{
-//                if let objects = object{
-//                    print(objects)
-//                }
-//            }else{
-//                print(error)
-//            }
-//        }
+
+
         
 //ใส่วันที่ลงแอป
         let today = NSDate()
@@ -346,14 +343,6 @@ class TimeTable: UIViewController {
         
         }//viewDidLoad เขียนถึงปีกกานี้
 }
-
-
-
-
-
-
-
-
 
 
 //        let query = PFQuery(className: "HT_Place")
@@ -497,6 +486,14 @@ func getweek(date:String)->String{
 //            topic["SubjectCode"] = subjectCodeId
 //            topic["Topic_Name"] = topicName
 //            topic.pinInBackground()
+//        }
+//        topicTeacherRetrive { (objectId, teacherId, topicScheduleId) -> Void in
+//            print(objectId, teacherId, topicScheduleId)
+//            let topicTeacher = PFObject(className: "Topic_Teacher")
+//            topicTeacher["objectId"] = objectId
+//            topicTeacher["Teacher"] = teacherId
+//            topicTeacher["TopicScheduleID"] = topicScheduleId
+//            topicTeacher.pinInBackground()
 //        }
 //------------------------------------------
 func timeRetrive (completion: (objectId:String,time:String) -> Void){
