@@ -10,18 +10,20 @@ import UIKit
 import Parse
 class detail: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    @IBAction func refreshButton(sender: AnyObject) {
         
-       
-        
-        
-        
-        
+        viewDidLoad()
         
     }
-        
-    }
-
+   
     
+    override func viewDidLoad()
+    {
+        super.viewDidLoad()
+     print("refresh")
+      
+    }
+  
+
+}
 

@@ -12,16 +12,15 @@
 		481BF95F1C61243E00EF80B3 /* 110642007.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 481BF95E1C61243E00EF80B3 /* 110642007.jpeg */; };
 		484951C61C6677140005D89A /* detailUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484951C51C6677140005D89A /* detailUIViewController.swift */; };
 		48BFC4AF1C76BC1700F8192B /* 3M.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48BFC4AE1C76BC1700F8192B /* 3M.storyboard */; };
-		48BFC4B11C76BC7900F8192B /* detail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48BFC4B01C76BC7900F8192B /* detail.storyboard */; };
 		48BFC4B31C76BCB200F8192B /* conclude.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48BFC4B21C76BCB200F8192B /* conclude.storyboard */; };
 		48BFC4B51C76BD1000F8192B /* history.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48BFC4B41C76BD1000F8192B /* history.storyboard */; };
 		48D3E8D51C60E8C5002C239E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D3E8D41C60E8C5002C239E /* AppDelegate.swift */; };
 		48D3E8D71C60E8C5002C239E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D3E8D61C60E8C5002C239E /* ViewController.swift */; };
-		48D3E8DA1C60E8C5002C239E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48D3E8D81C60E8C5002C239E /* Main.storyboard */; };
 		48D3E8DC1C60E8C5002C239E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48D3E8DB1C60E8C5002C239E /* Assets.xcassets */; };
 		48D3E8DF1C60E8C5002C239E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48D3E8DD1C60E8C5002C239E /* LaunchScreen.storyboard */; };
 		48D3E8EA1C60E8C5002C239E /* DarunsikkhalaiTimeTableAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D3E8E91C60E8C5002C239E /* DarunsikkhalaiTimeTableAppTests.swift */; };
 		48D3E8F51C60E8C5002C239E /* DarunsikkhalaiTimeTableAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D3E8F41C60E8C5002C239E /* DarunsikkhalaiTimeTableAppUITests.swift */; };
+		48DAB9A61C79C39900B47CB3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48DAB9A41C79C39900B47CB3 /* Main.storyboard */; };
 		48E620261C67547400593F0E /* threeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E620251C67547400593F0E /* threeView.swift */; };
 		48F5051F1C78A78E00B96462 /* login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48F5051E1C78A78E00B96462 /* login.storyboard */; };
 		48F563701C67608D001493EF /* conclude.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F5636F1C67608D001493EF /* conclude.swift */; };
@@ -49,18 +48,16 @@
 /* Begin PBXFileReference section */
 		18C3413FF4B8BDD1EE7A6030 /* Pods-DarunsikkhalaiTimeTableApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DarunsikkhalaiTimeTableApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DarunsikkhalaiTimeTableApp/Pods-DarunsikkhalaiTimeTableApp.debug.xcconfig"; sourceTree = "<group>"; };
 		26A91F2826858F995CD9BCEF /* Pods-DarunsikkhalaiTimeTableApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DarunsikkhalaiTimeTableApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-DarunsikkhalaiTimeTableApp/Pods-DarunsikkhalaiTimeTableApp.release.xcconfig"; sourceTree = "<group>"; };
-		480450E21C61F6B2001D7627 /* TimeTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeTable.swift; sourceTree = "<group>"; };
+		480450E21C61F6B2001D7627 /* TimeTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeTable.swift; sourceTree = "<group>"; usesTabs = 0; };
 		480450E41C6227C2001D7627 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		481BF95E1C61243E00EF80B3 /* 110642007.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 110642007.jpeg; sourceTree = "<group>"; };
 		484951C51C6677140005D89A /* detailUIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = detailUIViewController.swift; sourceTree = "<group>"; };
 		48BFC4AE1C76BC1700F8192B /* 3M.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = 3M.storyboard; sourceTree = "<group>"; };
-		48BFC4B01C76BC7900F8192B /* detail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = detail.storyboard; sourceTree = "<group>"; };
 		48BFC4B21C76BCB200F8192B /* conclude.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = conclude.storyboard; sourceTree = "<group>"; };
 		48BFC4B41C76BD1000F8192B /* history.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = history.storyboard; sourceTree = "<group>"; };
 		48D3E8D11C60E8C5002C239E /* DarunsikkhalaiTimeTableApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DarunsikkhalaiTimeTableApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		48D3E8D41C60E8C5002C239E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		48D3E8D61C60E8C5002C239E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		48D3E8D91C60E8C5002C239E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		48D3E8DB1C60E8C5002C239E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		48D3E8DE1C60E8C5002C239E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		48D3E8E01C60E8C5002C239E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -70,6 +67,7 @@
 		48D3E8F01C60E8C5002C239E /* DarunsikkhalaiTimeTableAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DarunsikkhalaiTimeTableAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		48D3E8F41C60E8C5002C239E /* DarunsikkhalaiTimeTableAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarunsikkhalaiTimeTableAppUITests.swift; sourceTree = "<group>"; };
 		48D3E8F61C60E8C5002C239E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		48DAB9A51C79C39900B47CB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		48E620251C67547400593F0E /* threeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = threeView.swift; sourceTree = "<group>"; };
 		48F5051E1C78A78E00B96462 /* login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = login.storyboard; sourceTree = "<group>"; };
 		48F5636F1C67608D001493EF /* conclude.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = conclude.swift; path = ../conclude.swift; sourceTree = "<group>"; };
@@ -134,7 +132,6 @@
 		48BFC4B81C76BD5000F8192B /* Detail */ = {
 			isa = PBXGroup;
 			children = (
-				48BFC4B01C76BC7900F8192B /* detail.storyboard */,
 				484951C51C6677140005D89A /* detailUIViewController.swift */,
 			);
 			name = Detail;
@@ -175,7 +172,7 @@
 		48D3E8D31C60E8C5002C239E /* DarunsikkhalaiTimeTableApp */ = {
 			isa = PBXGroup;
 			children = (
-				48D3E8D81C60E8C5002C239E /* Main.storyboard */,
+				48DAB9A41C79C39900B47CB3 /* Main.storyboard */,
 				48F5051E1C78A78E00B96462 /* login.storyboard */,
 				48D3E8DD1C60E8C5002C239E /* LaunchScreen.storyboard */,
 				48D3E8D41C60E8C5002C239E /* AppDelegate.swift */,
@@ -336,10 +333,9 @@
 			files = (
 				48D3E8DF1C60E8C5002C239E /* LaunchScreen.storyboard in Resources */,
 				48D3E8DC1C60E8C5002C239E /* Assets.xcassets in Resources */,
-				48D3E8DA1C60E8C5002C239E /* Main.storyboard in Resources */,
 				48F5051F1C78A78E00B96462 /* login.storyboard in Resources */,
+				48DAB9A61C79C39900B47CB3 /* Main.storyboard in Resources */,
 				48BFC4B51C76BD1000F8192B /* history.storyboard in Resources */,
-				48BFC4B11C76BC7900F8192B /* detail.storyboard in Resources */,
 				48BFC4B31C76BCB200F8192B /* conclude.storyboard in Resources */,
 				48BFC4AF1C76BC1700F8192B /* 3M.storyboard in Resources */,
 				481BF95F1C61243E00EF80B3 /* 110642007.jpeg in Resources */,
@@ -457,20 +453,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		48D3E8D81C60E8C5002C239E /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				48D3E8D91C60E8C5002C239E /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		48D3E8DD1C60E8C5002C239E /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				48D3E8DE1C60E8C5002C239E /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		48DAB9A41C79C39900B47CB3 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				48DAB9A51C79C39900B47CB3 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

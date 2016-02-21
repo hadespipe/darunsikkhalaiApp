@@ -81,8 +81,8 @@
                                         <exclude reference="bAo-Fb-HAB"/>
                                     </mask>
                                     <mask key="constraints">
-                                        <exclude reference="rZv-1D-DxY"/>
                                         <exclude reference="bO3-cn-haM"/>
+                                        <exclude reference="rZv-1D-DxY"/>
                                     </mask>
                                 </variation>
                                 <variation key="widthClass=regular">
@@ -94,8 +94,8 @@
                                         <include reference="bAo-Fb-HAB"/>
                                     </mask>
                                     <mask key="constraints">
-                                        <include reference="rZv-1D-DxY"/>
                                         <include reference="bO3-cn-haM"/>
+                                        <include reference="rZv-1D-DxY"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -200,13 +200,13 @@
                                 <exclude reference="aYG-8K-J3X"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="0uf-ly-kih"/>
-                                <exclude reference="vwh-ev-mxW"/>
-                                <exclude reference="9w2-Ga-vsC"/>
                                 <exclude reference="Jzx-3b-s6n"/>
-                                <exclude reference="fN3-gf-onv"/>
                                 <exclude reference="VZ5-Ht-h44"/>
+                                <exclude reference="fN3-gf-onv"/>
                                 <exclude reference="ohM-Qj-FoP"/>
+                                <exclude reference="0uf-ly-kih"/>
+                                <exclude reference="9w2-Ga-vsC"/>
+                                <exclude reference="vwh-ev-mxW"/>
                                 <exclude reference="Gxv-do-v6X"/>
                             </mask>
                         </variation>
@@ -216,13 +216,13 @@
                                 <include reference="aYG-8K-J3X"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="0uf-ly-kih"/>
-                                <include reference="vwh-ev-mxW"/>
-                                <include reference="9w2-Ga-vsC"/>
                                 <include reference="Jzx-3b-s6n"/>
-                                <include reference="fN3-gf-onv"/>
                                 <include reference="VZ5-Ht-h44"/>
+                                <include reference="fN3-gf-onv"/>
                                 <include reference="ohM-Qj-FoP"/>
+                                <include reference="0uf-ly-kih"/>
+                                <include reference="9w2-Ga-vsC"/>
+                                <include reference="vwh-ev-mxW"/>
                                 <include reference="Gxv-do-v6X"/>
                             </mask>
                         </variation>
