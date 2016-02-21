@@ -11,7 +11,15 @@ import Parse
 
 class TimeTable: UIViewController {
    
+    @IBOutlet var conclude: UITabBarItem!
+    @IBOutlet var m4Button: UITabBar!
+    @IBOutlet var m5Button: UITabBarItem!
+    @IBOutlet var m6Button: UITabBarItem!
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+     
+    }
     
     func timeRetrive (completion: (objectId:String,time:String) -> Void){
         var keepAlive = true
@@ -630,7 +638,7 @@ class TimeTable: UIViewController {
 //        }
 
  
-        
+    
       
         print(day)
         //การเปิดตารางเรียน
@@ -1825,20 +1833,8 @@ func timeConvertNew(timeId:String)->String{
 }
 
 
-func teach()->Void{
-    let teacher = PFQuery(className: "Topic_Teacher")
-    teacher.fromLocalDatastore()
-    teacher.findObjectsInBackgroundWithBlock { (object, error) -> Void in
-        if error == nil{
-            if let objects = object{
-                for object in objects{
-                    
-                }
-            }
-        }else{
-            print(error)
-        }
-    }
+func clearButton(button:UIButton)->Void{
+   button.setTitle("        ", forState: .Normal)
 }
 
 
