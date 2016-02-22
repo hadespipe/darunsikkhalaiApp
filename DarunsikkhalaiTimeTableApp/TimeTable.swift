@@ -10,7 +10,7 @@ import UIKit
 import Parse
 
 class TimeTable: UIViewController {
-   
+    
     @IBOutlet var conclude: UITabBarItem!
     @IBOutlet var m4Button: UITabBar!
     @IBOutlet var m5Button: UITabBarItem!
@@ -18,7 +18,7 @@ class TimeTable: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
-     
+        
     }
     
     func timeRetrive (completion: (objectId:String,time:String) -> Void){
@@ -102,7 +102,7 @@ class TimeTable: UIViewController {
             fridayDate.text = adaptDateString(-2+(count*7))
         default :
             print("Error")
-        
+            
         }
         let day:[String] = [mondayDate.text!,tuesdayDate.text!,wednesdayDate.text!,thursdayDate.text!,fridayDate.text!]
         print(mondayDate.text)
@@ -554,9 +554,9 @@ class TimeTable: UIViewController {
                 print(error)
             }
         }
-
+        
     }
-//UIButton List 
+    //UIButton List
     // วัน
     @IBOutlet var mondayDate: UILabel!
     @IBOutlet var tuesdayDate: UILabel!
@@ -605,41 +605,41 @@ class TimeTable: UIViewController {
     var timeStart = String()
     var timeStop = String()
     override func viewWillAppear(animated: Bool) {
-//        let user = PFUser.currentUser()
-//        print(user)
+        //        let user = PFUser.currentUser()
+        //        print(user)
         super.viewWillAppear(true)
         
         let day:[String] = [mondayDate.text!,tuesdayDate.text!,wednesdayDate.text!,thursdayDate.text!,fridayDate.text!]
-//        subjectThisWeek(day) { (objectId, date, timeStartId, timeStopId,topicId) -> Void in
-//            print(objectId, date, timeStartId, timeStopId,topicId)
-//            print(timeStartId)
-//            print(timeConvertNew(timeStartId as String))
-//          
-//        }
+        //        subjectThisWeek(day) { (objectId, date, timeStartId, timeStopId,topicId) -> Void in
+        //            print(objectId, date, timeStartId, timeStopId,topicId)
+        //            print(timeStartId)
+        //            print(timeConvertNew(timeStartId as String))
+        //
+        //        }
         
-//        timeConvert("MffGvFd0QV") { (time) -> Void in
-//            print("It's \(time)")
-//            print(timeToPeriod(time))
-//        }
+        //        timeConvert("MffGvFd0QV") { (time) -> Void in
+        //            print("It's \(time)")
+        //            print(timeToPeriod(time))
+        //        }
         
         
-//
-//        topicLocal("czHP4szIao") { (subjectCode, topicName) -> Void in
-//            print("haha")
-//            print(subjectCode, topicName)
-//        }
-//        
-//        subjectCodeToGrade("b9104bVKbj") { (grade) -> Void in
-//            print("I'm in \(grade)")
-//        }
-//        
-//        teacherFromTopicId("O5iqTQBYCq") { (teacher) -> Void in
-//            print("I'm \(teacher)")
-//        }
-
- 
-    
-      
+        //
+        //        topicLocal("czHP4szIao") { (subjectCode, topicName) -> Void in
+        //            print("haha")
+        //            print(subjectCode, topicName)
+        //        }
+        //
+        //        subjectCodeToGrade("b9104bVKbj") { (grade) -> Void in
+        //            print("I'm in \(grade)")
+        //        }
+        //
+        //        teacherFromTopicId("O5iqTQBYCq") { (teacher) -> Void in
+        //            print("I'm \(teacher)")
+        //        }
+        
+        
+        
+        
         print(day)
         //การเปิดตารางเรียน
         //โชว์คาบ
@@ -833,18 +833,18 @@ class TimeTable: UIViewController {
                 print(error)
             }
         }
-
         
-
-      
+        
+        
+        
         
     }
-  
+    
     
     var subjectTest = String()
     
     
-
+    
     
     func test (completion: (classid:String, info:String) -> Void){
         var keepAlive = true
@@ -944,95 +944,95 @@ class TimeTable: UIViewController {
     var checkApp = String()
     var checkPoint = Int()
     
- 
-
+    
+    
     override func viewDidLoad() {  // <-- func นี้สำหรับ code ที่ต้องการให้ run เมื่อเปิดหน้านี้
-
+        
         super.viewDidLoad()
         
-    
+        
         
         
         // checkLocal("Topic_Schedule")
         
         
-//        
-//        let query = PFQuery(className: "Time_FK")
-//        query.fromLocalDatastore()
-//        query.whereKey("Time", equalTo: "19.00")
-//        query.findObjectsInBackgroundWithBlock{ (object, error) -> Void in
-//            if error == nil{
-//                if let objects = object{
-//                    print(objects.capacity)
-//                    for object in objects{
-//                        print("hah")
-//                        print(object["objectId"])
-//                    }
-//                }
-//            }else{
-//                print(error)
-//            }
-//        }
+        //
+        //        let query = PFQuery(className: "Time_FK")
+        //        query.fromLocalDatastore()
+        //        query.whereKey("Time", equalTo: "19.00")
+        //        query.findObjectsInBackgroundWithBlock{ (object, error) -> Void in
+        //            if error == nil{
+        //                if let objects = object{
+        //                    print(objects.capacity)
+        //                    for object in objects{
+        //                        print("hah")
+        //                        print(object["objectId"])
+        //                    }
+        //                }
+        //            }else{
+        //                print(error)
+        //            }
+        //        }
         
         
         // สำหรับการเช็คว่า เราเคยเก็บค่าต่างๆ ใส่เครื่องหรือยัง
-//                checkApp { (check) -> Void in
-//            print(check)
-//            self.checkApp = check
-//        }
-// ลบตาราง
-//            let query = PFQuery(className: "Time_FK")
-//            query.fromLocalDatastore()
-//            query.limit = 1000
-//            query.findObjectsInBackgroundWithBlock { (object, error) -> Void in
-//                if error == nil{
-//                    if let objects = object{
-//                        for object in objects{
-//                            object.unpinInBackground()
-//                        }
-//                    }
-//                }else{
-//                    print(error)
-//                }
-//            }
+        //                checkApp { (check) -> Void in
+        //            print(check)
+        //            self.checkApp = check
+        //        }
+        // ลบตาราง
+        //            let query = PFQuery(className: "Time_FK")
+        //            query.fromLocalDatastore()
+        //            query.limit = 1000
+        //            query.findObjectsInBackgroundWithBlock { (object, error) -> Void in
+        //                if error == nil{
+        //                    if let objects = object{
+        //                        for object in objects{
+        //                            object.unpinInBackground()
+        //                        }
+        //                    }
+        //                }else{
+        //                    print(error)
+        //                }
+        //            }
         
         //เก็บค่า check ลงตาราง "Check"
         
-//        let checkQuery = PFQuery(className: "Check")
-//        checkQuery.fromLocalDatastore()
-//        checkQuery.whereKey("check", equalTo: "check")
-//        checkQuery.findObjectsInBackgroundWithBlock{(objects, error) -> Void in
-//            if error == nil
-//            {
-//                if let objects = objects
-//                {
-//                    print(objects.capacity)
-//                    if objects.capacity == 0{
-//                        let checkTable = PFObject(className: "Check")
-//                        checkTable["check"] = "check"
-//                        checkTable.pinInBackground()
-//
-//                    }else{
-//                        print("Check is here.")
-//                    }
-//                    
-//                }
-//            }
-//        }
-//        
-//        checkPoint { (check) -> Void in
-//            self.checkPoint = check
-//        }
-//        print("check =  \(checkPoint)")
-//        
-//        //เริ่มเก็บค่าต่างๆ ลง Local datastore
-//        if checkPoint == 0{
-//            
-//        }
+        //        let checkQuery = PFQuery(className: "Check")
+        //        checkQuery.fromLocalDatastore()
+        //        checkQuery.whereKey("check", equalTo: "check")
+        //        checkQuery.findObjectsInBackgroundWithBlock{(objects, error) -> Void in
+        //            if error == nil
+        //            {
+        //                if let objects = objects
+        //                {
+        //                    print(objects.capacity)
+        //                    if objects.capacity == 0{
+        //                        let checkTable = PFObject(className: "Check")
+        //                        checkTable["check"] = "check"
+        //                        checkTable.pinInBackground()
+        //
+        //                    }else{
+        //                        print("Check is here.")
+        //                    }
+        //
+        //                }
+        //            }
+        //        }
+        //
+        //        checkPoint { (check) -> Void in
+        //            self.checkPoint = check
+        //        }
+        //        print("check =  \(checkPoint)")
+        //
+        //        //เริ่มเก็บค่าต่างๆ ลง Local datastore
+        //        if checkPoint == 0{
+        //
+        //        }
         
-
         
-//ใส่วันที่ลงแอป
+        
+        //ใส่วันที่ลงแอป
         let today = NSDate()
         let todayFormatter = NSDateFormatter()
         todayFormatter.dateFormat = "dd-MM-yyyy"
@@ -1088,24 +1088,24 @@ class TimeTable: UIViewController {
         default :
             print("Error")
         }
-    
-
-     
         
         
         
-//        
-//        timeRetrive { (objectId, time) -> Void in
-//            print(objectId, time)
-//            let timeTable = PFObject(className: "Time_FK")
-//            timeTable.objectId = objectId
-//            timeTable["Time"] = time
-//            timeTable.pinInBackground()
-//        }
-//        
         
         
-        }//viewDidLoad เขียนถึงปีกกานี้
+        
+        //
+        //        timeRetrive { (objectId, time) -> Void in
+        //            print(objectId, time)
+        //            let timeTable = PFObject(className: "Time_FK")
+        //            timeTable.objectId = objectId
+        //            timeTable["Time"] = time
+        //            timeTable.pinInBackground()
+        //        }
+        //
+        
+        
+    }//viewDidLoad เขียนถึงปีกกานี้
 }
 
 
@@ -1469,7 +1469,7 @@ func userRetrive (completion: (objectId:String,namelist:String,classId:String,em
 
 func morningOrAfternoon(timeStart:String,timeStop:String)->(String){
     var result = String()
- 
+    
     switch timeStart {
     case "8.00","9.00","10.00","11.00":
         print("morning")
@@ -1518,12 +1518,12 @@ func timeConvert(time:String)->String{
     
     switch time{
     case "9.00","10.00","11.00":
-    return "M"
+        return "M"
     case "13.00","14.00","15.00":
         return "A"
     case "18.00","19.00","20.00","21.00":
         return "n"
-        default:
+    default:
         return "error"
         
     }
@@ -1531,136 +1531,107 @@ func timeConvert(time:String)->String{
 }
 
 /*func toLocal(completion: ()->String{
-    let subject = PFQuery(className: "Topic_Schedule")
-    subject.fromLocalDatastore()
-    subject.whereKey("Date", containedIn: day)
-    subject.findObjectsInBackgroundWithBlock { (object, error) -> Void in
-    if error == nil{
-    if let objects = object{
-    print(objects.capacity)
-    for object in objects{
-    //print(object)
-    //เปิดเวลา และ topicId
-    let timeStart = object["Time_start"] as AnyObject
-    
-    let timeStop = object["Time_stop"] as! String
-    let topicId = object["TopicID"]
-    let date = object["Date"]
-    //print(timeStart,timeStop,topicId)
-    print("TimeStart = \(timeStart),TimeStop = \(timeStop)")
-    let timeQuery = PFQuery(className: "Time_FK")
-    timeQuery.fromLocalDatastore()
-    //timeQuery.whereKey("objectId", equalTo: timeStop)
-    timeQuery.findObjectsInBackgroundWithBlock({ (object, error) -> Void in
-    if error == nil{
-    if let objects = object{
-    //print(objects.capacity)
-    for object in objects{
-    if (timeStart as! String as String) as String == object["objectId"] as! String{
-    
-    //อยู่คาบเช้า
-    let period = timeConvert(object["Time"] as! String)
-    //let endPeriod = timeConvert()
-    
-    let topic = PFQuery(className: "Topic")
-    topic.fromLocalDatastore()
-    //topic.whereKey("objectId", equalTo: topicId)
-    topic.findObjectsInBackgroundWithBlock({ (object, error) -> Void in
-    if error == nil{
-    if let objects = object{
-    print(objects.capacity)
-    for object in objects{
-    if object["objectId"] as! String == topicId as! String{
-    let topicName = object["Topic_Name"]
-    
-    let subjectCode = object["SubjectCode"]
-    let subjectQuery = PFQuery(className: "Subject")
-    subjectQuery.fromLocalDatastore()
-    subjectQuery.findObjectsInBackgroundWithBlock({ (object, error) -> Void in
-    if error == nil{
-    if let objects = object{
-    for object in objects{
-    if subjectCode as! String == object["objectId"] as! String{
-    let classId = object["Class"] as! String
-    var theirClass = String()
-    switch classId{
-    case "Jdr0Rowr8p":
-    theirClass = "m.6"
-    case "exv130NBiY":
-    theirClass = "m.5"
-    case "wleD05apD3":
-    theirClass = "m.4"
-    default:
-    print("error in classId switch case.")
-    }
-    print("\(topicName) in (\(date)) is \(period) =  \(object["objectId"])   \(theirClass)")
-    
-    }
-    }
-    }
-    }else{
-    print(error)
-    }
-    })
-    }
-    
-    }
-    }
-    }
-    })
-    
-    }
-    }
-    }
-    }else{
-    print(error)
-    }
-    })
-    }
-    }
-    }else{
-    print(error)
-    }
-    }
+let subject = PFQuery(className: "Topic_Schedule")
+subject.fromLocalDatastore()
+subject.whereKey("Date", containedIn: day)
+subject.findObjectsInBackgroundWithBlock { (object, error) -> Void in
+if error == nil{
+if let objects = object{
+print(objects.capacity)
+for object in objects{
+//print(object)
+//เปิดเวลา และ topicId
+let timeStart = object["Time_start"] as AnyObject
+
+let timeStop = object["Time_stop"] as! String
+let topicId = object["TopicID"]
+let date = object["Date"]
+//print(timeStart,timeStop,topicId)
+print("TimeStart = \(timeStart),TimeStop = \(timeStop)")
+let timeQuery = PFQuery(className: "Time_FK")
+timeQuery.fromLocalDatastore()
+//timeQuery.whereKey("objectId", equalTo: timeStop)
+timeQuery.findObjectsInBackgroundWithBlock({ (object, error) -> Void in
+if error == nil{
+if let objects = object{
+//print(objects.capacity)
+for object in objects{
+if (timeStart as! String as String) as String == object["objectId"] as! String{
+
+//อยู่คาบเช้า
+let period = timeConvert(object["Time"] as! String)
+//let endPeriod = timeConvert()
+
+let topic = PFQuery(className: "Topic")
+topic.fromLocalDatastore()
+//topic.whereKey("objectId", equalTo: topicId)
+topic.findObjectsInBackgroundWithBlock({ (object, error) -> Void in
+if error == nil{
+if let objects = object{
+print(objects.capacity)
+for object in objects{
+if object["objectId"] as! String == topicId as! String{
+let topicName = object["Topic_Name"]
+
+let subjectCode = object["SubjectCode"]
+let subjectQuery = PFQuery(className: "Subject")
+subjectQuery.fromLocalDatastore()
+subjectQuery.findObjectsInBackgroundWithBlock({ (object, error) -> Void in
+if error == nil{
+if let objects = object{
+for object in objects{
+if subjectCode as! String == object["objectId"] as! String{
+let classId = object["Class"] as! String
+var theirClass = String()
+switch classId{
+case "Jdr0Rowr8p":
+theirClass = "m.6"
+case "exv130NBiY":
+theirClass = "m.5"
+case "wleD05apD3":
+theirClass = "m.4"
+default:
+print("error in classId switch case.")
+}
+print("\(topicName) in (\(date)) is \(period) =  \(object["objectId"])   \(theirClass)")
+
+}
+}
+}
+}else{
+print(error)
+}
+})
+}
+
+}
+}
+}
+})
+
+}
+}
+}
+}else{
+print(error)
+}
+})
+}
+}
+}else{
+print(error)
+}
+}
 
 }*/
 
 
 func subjectThisWeek (week:[String],completion: (objectId:String,date:String,timeStartId:String,timeStopId:String,topicId:String) -> Void){
-        var keepAlive = true
-        let test:PFQuery = PFQuery(className: "Topic_Schedule")
-        test.fromLocalDatastore()
-        test.limit = 1000
-        test.whereKey("Date", containedIn: week)
-        test.findObjectsInBackgroundWithBlock{(objects, error) -> Void in
-            
-            if error == nil
-            {
-                
-                if let objects = objects
-                {
-                   // print(objects.capacity)
-                   // print(objects)
-                    for object in objects{
-                        completion(objectId:object["objectId"] as! String ,date:object["Date"] as! String,timeStartId:object["Time_start"] as! String,timeStopId:object["Time_stop"] as! String,topicId: object["TopicID"] as! String)
-                        keepAlive = false
-                    }
-                }
-            }
-        }
-        
-        let runLoop = NSRunLoop.currentRunLoop()
-        while keepAlive && runLoop.runMode(NSDefaultRunLoopMode, beforeDate: NSDate(timeIntervalSinceNow: 0.1)) {
-            print("x")
-        }
-}
-
-func timeConvert (timeId:String,completion:(time:String) -> Void){
     var keepAlive = true
-    let test:PFQuery = PFQuery(className: "Time_FK")
+    let test:PFQuery = PFQuery(className: "Topic_Schedule")
     test.fromLocalDatastore()
     test.limit = 1000
-   // test.whereKey("objectId", equalTo: timeId)
+    test.whereKey("Date", containedIn: week)
     test.findObjectsInBackgroundWithBlock{(objects, error) -> Void in
         
         if error == nil
@@ -1668,7 +1639,36 @@ func timeConvert (timeId:String,completion:(time:String) -> Void){
             
             if let objects = objects
             {
-               // print(objects.capacity)
+                // print(objects.capacity)
+                // print(objects)
+                for object in objects{
+                    completion(objectId:object["objectId"] as! String ,date:object["Date"] as! String,timeStartId:object["Time_start"] as! String,timeStopId:object["Time_stop"] as! String,topicId: object["TopicID"] as! String)
+                    keepAlive = false
+                }
+            }
+        }
+    }
+    
+    let runLoop = NSRunLoop.currentRunLoop()
+    while keepAlive && runLoop.runMode(NSDefaultRunLoopMode, beforeDate: NSDate(timeIntervalSinceNow: 0.1)) {
+        print("x")
+    }
+}
+
+func timeConvert (timeId:String,completion:(time:String) -> Void){
+    var keepAlive = true
+    let test:PFQuery = PFQuery(className: "Time_FK")
+    test.fromLocalDatastore()
+    test.limit = 1000
+    // test.whereKey("objectId", equalTo: timeId)
+    test.findObjectsInBackgroundWithBlock{(objects, error) -> Void in
+        
+        if error == nil
+        {
+            
+            if let objects = objects
+            {
+                // print(objects.capacity)
                 //print(objects)
                 for object in objects{
                     if object["objectId"] as! String == timeId as String{
@@ -1834,7 +1834,7 @@ func timeConvertNew(timeId:String)->String{
 
 
 func clearButton(button:UIButton)->Void{
-   button.setTitle("        ", forState: .Normal)
+    button.setTitle("        ", forState: .Normal)
 }
 
 

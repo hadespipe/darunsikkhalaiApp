@@ -10,6 +10,8 @@
 		480450E31C61F6B2001D7627 /* TimeTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480450E21C61F6B2001D7627 /* TimeTable.swift */; };
 		480450E51C6227C2001D7627 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 480450E41C6227C2001D7627 /* libsqlite3.tbd */; };
 		481BF95F1C61243E00EF80B3 /* 110642007.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 481BF95E1C61243E00EF80B3 /* 110642007.jpeg */; };
+		481F8DE11C7B2EEA007E4FF6 /* timeTableM4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481F8DE01C7B2EEA007E4FF6 /* timeTableM4.swift */; };
+		481F8DE31C7B2F0E007E4FF6 /* timeTableM5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481F8DE21C7B2F0E007E4FF6 /* timeTableM5.swift */; };
 		484951C61C6677140005D89A /* detailUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484951C51C6677140005D89A /* detailUIViewController.swift */; };
 		48BFC4AF1C76BC1700F8192B /* 3M.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48BFC4AE1C76BC1700F8192B /* 3M.storyboard */; };
 		48BFC4B31C76BCB200F8192B /* conclude.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48BFC4B21C76BCB200F8192B /* conclude.storyboard */; };
@@ -51,6 +53,8 @@
 		480450E21C61F6B2001D7627 /* TimeTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeTable.swift; sourceTree = "<group>"; usesTabs = 0; };
 		480450E41C6227C2001D7627 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		481BF95E1C61243E00EF80B3 /* 110642007.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 110642007.jpeg; sourceTree = "<group>"; };
+		481F8DE01C7B2EEA007E4FF6 /* timeTableM4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = timeTableM4.swift; sourceTree = "<group>"; };
+		481F8DE21C7B2F0E007E4FF6 /* timeTableM5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = timeTableM5.swift; sourceTree = "<group>"; };
 		484951C51C6677140005D89A /* detailUIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = detailUIViewController.swift; sourceTree = "<group>"; };
 		48BFC4AE1C76BC1700F8192B /* 3M.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = 3M.storyboard; sourceTree = "<group>"; };
 		48BFC4B21C76BCB200F8192B /* conclude.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = conclude.storyboard; sourceTree = "<group>"; };
@@ -178,6 +182,8 @@
 				48D3E8D41C60E8C5002C239E /* AppDelegate.swift */,
 				48D3E8D61C60E8C5002C239E /* ViewController.swift */,
 				480450E21C61F6B2001D7627 /* TimeTable.swift */,
+				481F8DE21C7B2F0E007E4FF6 /* timeTableM5.swift */,
+				481F8DE01C7B2EEA007E4FF6 /* timeTableM4.swift */,
 				48BFC4B81C76BD5000F8192B /* Detail */,
 				48BFC4B91C76BD5D00F8192B /* Conclude */,
 				48BFC4B71C76BD4200F8192B /* 3m */,
@@ -415,7 +421,9 @@
 				48F563721C6760E5001493EF /* history.swift in Sources */,
 				48E620261C67547400593F0E /* threeView.swift in Sources */,
 				48F563701C67608D001493EF /* conclude.swift in Sources */,
+				481F8DE11C7B2EEA007E4FF6 /* timeTableM4.swift in Sources */,
 				480450E31C61F6B2001D7627 /* TimeTable.swift in Sources */,
+				481F8DE31C7B2F0E007E4FF6 /* timeTableM5.swift in Sources */,
 				48D3E8D51C60E8C5002C239E /* AppDelegate.swift in Sources */,
 				484951C61C6677140005D89A /* detailUIViewController.swift in Sources */,
 			);
