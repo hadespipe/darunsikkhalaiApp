@@ -11,7 +11,7 @@ import Parse
 class threeMView: UIViewController{
     
     @IBAction func previousButton(sender: AnyObject) {
-        count--
+        count -= 1
         //ใส่วันที่ลงแอป
         let today = NSDate()
         let todayFormatter = NSDateFormatter()
@@ -268,7 +268,7 @@ class threeMView: UIViewController{
     }
     
     @IBAction func nextButton(sender: AnyObject) {
-        count++
+        count += 1
         //ใส่วันที่ลงแอป
         let today = NSDate()
         let todayFormatter = NSDateFormatter()

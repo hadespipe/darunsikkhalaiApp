@@ -46,7 +46,7 @@ class TimeTable: UIViewController {
         }
     }
     @IBAction func nextButton(sender: AnyObject) {
-        count++
+        count += 1
         //ใส่วันที่ลงแอป
         let today = NSDate()
         let todayFormatter = NSDateFormatter()
@@ -306,7 +306,7 @@ class TimeTable: UIViewController {
         
     }
     @IBAction func previousButton(sender: AnyObject) {
-        count--
+        count -= 1
         //ใส่วันที่ลงแอป
         let today = NSDate()
         let todayFormatter = NSDateFormatter()
