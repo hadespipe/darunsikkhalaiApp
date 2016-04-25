@@ -845,7 +845,7 @@ class TimeTable: UIViewController {
     
     
     
-    
+    //ต้นแบบการรับค่า
     func test (completion: (classid:String, info:String) -> Void){
         var keepAlive = true
         let test:PFQuery = PFQuery(className: "Subject")
@@ -873,52 +873,8 @@ class TimeTable: UIViewController {
     }
     
     
-    func checkApp (completion: (check:String) -> Void){
-        var keepAlive = true
-        let test:PFQuery = PFQuery(className: "check")
-        test.whereKey("check", equalTo: "check")
-        test.findObjectsInBackgroundWithBlock{(objects, error) -> Void in
-            if error == nil
-            {
-                if let objects = objects
-                {
-                    for object in objects{
-                        //  print(object[""])
-                        completion(check: object["check"] as! String)
-                        keepAlive = false
-                    }
-                }
-            }
-        }
-        
-        let runLoop = NSRunLoop.currentRunLoop()
-        while keepAlive && runLoop.runMode(NSDefaultRunLoopMode, beforeDate: NSDate(timeIntervalSinceNow: 0.1)) {
-            print("x")
-        }
-    }
-    
-    func checkPoint (completion: (check:Int) -> Void){
-        var keepAlive = true
-        let test:PFQuery = PFQuery(className: "Check")
-        test.fromLocalDatastore()
-        test.whereKey("check", equalTo: "check")
-        test.findObjectsInBackgroundWithBlock{(objects, error) -> Void in
-            if error == nil
-            {
-                if let objects = objects
-                {
-                    completion(check: objects.capacity)
-                    keepAlive = false
-                    
-                }
-            }
-        }
-        
-        let runLoop = NSRunLoop.currentRunLoop()
-        while keepAlive && runLoop.runMode(NSDefaultRunLoopMode, beforeDate: NSDate(timeIntervalSinceNow: 0.1)) {
-            print("x")
-        }
-    }
+
+// check ว่ามีข้อมูลอยู่ใน local datastore โดยบอกชื่อ class
     func checkLocal(classname:String)->Void{
         let query = PFQuery(className: classname)
         query.limit = 1000
@@ -953,7 +909,7 @@ class TimeTable: UIViewController {
         
         
         
-        // checkLocal("Topic_Schedule")
+         checkLocal("Topic_Schedule")
         
         
         //

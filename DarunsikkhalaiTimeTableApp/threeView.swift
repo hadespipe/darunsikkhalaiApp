@@ -10,6 +10,9 @@ import UIKit
 import Parse
 class threeMView: UIViewController{
     
+    @IBAction func nextSwipe(sender: UISwipeGestureRecognizer) {
+        mondayDate.backgroundColor = UIColor.orangeColor()
+    }
     @IBAction func previousButton(sender: AnyObject) {
         count -= 1
         //ใส่วันที่ลงแอป

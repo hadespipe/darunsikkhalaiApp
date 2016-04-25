@@ -13,11 +13,6 @@
 		481F8DE11C7B2EEA007E4FF6 /* timeTableM4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481F8DE01C7B2EEA007E4FF6 /* timeTableM4.swift */; };
 		481F8DE31C7B2F0E007E4FF6 /* timeTableM5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481F8DE21C7B2F0E007E4FF6 /* timeTableM5.swift */; };
 		484951C61C6677140005D89A /* detailUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484951C51C6677140005D89A /* detailUIViewController.swift */; };
-		487E9A321CCA818000912CCC /* edit.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 487E9A311CCA818000912CCC /* edit.storyboard */; };
-		487E9A351CCA847200912CCC /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 487E9A341CCA847200912CCC /* Storyboard.storyboard */; };
-		487E9A391CCA894900912CCC /* history.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 487E9A381CCA894900912CCC /* history.storyboard */; };
-		48BFC4AF1C76BC1700F8192B /* 3M.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48BFC4AE1C76BC1700F8192B /* 3M.storyboard */; };
-		48BFC4B31C76BCB200F8192B /* conclude.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48BFC4B21C76BCB200F8192B /* conclude.storyboard */; };
 		48D3E8D51C60E8C5002C239E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D3E8D41C60E8C5002C239E /* AppDelegate.swift */; };
 		48D3E8D71C60E8C5002C239E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D3E8D61C60E8C5002C239E /* ViewController.swift */; };
 		48D3E8DC1C60E8C5002C239E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48D3E8DB1C60E8C5002C239E /* Assets.xcassets */; };
@@ -58,11 +53,6 @@
 		481F8DE01C7B2EEA007E4FF6 /* timeTableM4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = timeTableM4.swift; sourceTree = "<group>"; };
 		481F8DE21C7B2F0E007E4FF6 /* timeTableM5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = timeTableM5.swift; sourceTree = "<group>"; };
 		484951C51C6677140005D89A /* detailUIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = detailUIViewController.swift; sourceTree = "<group>"; };
-		487E9A311CCA818000912CCC /* edit.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = edit.storyboard; sourceTree = "<group>"; };
-		487E9A341CCA847200912CCC /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
-		487E9A381CCA894900912CCC /* history.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = history.storyboard; sourceTree = "<group>"; };
-		48BFC4AE1C76BC1700F8192B /* 3M.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = 3M.storyboard; sourceTree = "<group>"; };
-		48BFC4B21C76BCB200F8192B /* conclude.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = conclude.storyboard; sourceTree = "<group>"; };
 		48D3E8D11C60E8C5002C239E /* DarunsikkhalaiTimeTableApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DarunsikkhalaiTimeTableApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		48D3E8D41C60E8C5002C239E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		48D3E8D61C60E8C5002C239E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -119,67 +109,49 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		487E9A301CCA815100912CCC /* Edit */ = {
+		485619F91CCE132800F4F8A0 /* viewController */ = {
 			isa = PBXGroup;
 			children = (
-				487E9A311CCA818000912CCC /* edit.storyboard */,
-			);
-			name = Edit;
-			sourceTree = "<group>";
-		};
-		487E9A331CCA845A00912CCC /* addClass */ = {
-			isa = PBXGroup;
-			children = (
-				487E9A341CCA847200912CCC /* Storyboard.storyboard */,
-			);
-			name = addClass;
-			sourceTree = "<group>";
-		};
-		48BFC4B61C76BD2300F8192B /* history */ = {
-			isa = PBXGroup;
-			children = (
-				48F563711C6760E5001493EF /* history.swift */,
-				487E9A381CCA894900912CCC /* history.storyboard */,
-			);
-			name = history;
-			sourceTree = "<group>";
-		};
-		48BFC4B71C76BD4200F8192B /* 3m */ = {
-			isa = PBXGroup;
-			children = (
-				48BFC4AE1C76BC1700F8192B /* 3M.storyboard */,
+				48D3E8D41C60E8C5002C239E /* AppDelegate.swift */,
+				48D3E8D61C60E8C5002C239E /* ViewController.swift */,
+				480450E21C61F6B2001D7627 /* TimeTable.swift */,
+				481F8DE21C7B2F0E007E4FF6 /* timeTableM5.swift */,
+				481F8DE01C7B2EEA007E4FF6 /* timeTableM4.swift */,
+				48F5636F1C67608D001493EF /* conclude.swift */,
 				48E620251C67547400593F0E /* threeView.swift */,
-			);
-			name = 3m;
-			sourceTree = "<group>";
-		};
-		48BFC4B81C76BD5000F8192B /* Detail */ = {
-			isa = PBXGroup;
-			children = (
+				48F563711C6760E5001493EF /* history.swift */,
 				484951C51C6677140005D89A /* detailUIViewController.swift */,
 			);
-			name = Detail;
+			name = viewController;
 			sourceTree = "<group>";
 		};
-		48BFC4B91C76BD5D00F8192B /* Conclude */ = {
+		485619FA1CCE134100F4F8A0 /* storyboard */ = {
 			isa = PBXGroup;
 			children = (
-				48BFC4B21C76BCB200F8192B /* conclude.storyboard */,
-				48F5636F1C67608D001493EF /* conclude.swift */,
+				48DAB9A41C79C39900B47CB3 /* Main.storyboard */,
+				48F5051E1C78A78E00B96462 /* login.storyboard */,
+				48D3E8DD1C60E8C5002C239E /* LaunchScreen.storyboard */,
 			);
-			name = Conclude;
+			name = storyboard;
+			sourceTree = "<group>";
+		};
+		485619FB1CCE135200F4F8A0 /* เกะกะ */ = {
+			isa = PBXGroup;
+			children = (
+				48D3E8E81C60E8C5002C239E /* DarunsikkhalaiTimeTableAppTests */,
+				48D3E8F31C60E8C5002C239E /* DarunsikkhalaiTimeTableAppUITests */,
+				48D3E8D21C60E8C5002C239E /* Products */,
+				41D755625863584CC5DA463B /* Pods */,
+				FB1F2C94F22B0F40D8DDB528 /* Frameworks */,
+			);
+			name = "เกะกะ";
 			sourceTree = "<group>";
 		};
 		48D3E8C81C60E8C5002C239E = {
 			isa = PBXGroup;
 			children = (
 				48D3E8D31C60E8C5002C239E /* DarunsikkhalaiTimeTableApp */,
-				48D3E8E81C60E8C5002C239E /* DarunsikkhalaiTimeTableAppTests */,
-				48F563731C67613C001493EF /* image */,
-				48D3E8F31C60E8C5002C239E /* DarunsikkhalaiTimeTableAppUITests */,
-				48D3E8D21C60E8C5002C239E /* Products */,
-				41D755625863584CC5DA463B /* Pods */,
-				FB1F2C94F22B0F40D8DDB528 /* Frameworks */,
+				485619FB1CCE135200F4F8A0 /* เกะกะ */,
 			);
 			sourceTree = "<group>";
 		};
@@ -196,20 +168,9 @@
 		48D3E8D31C60E8C5002C239E /* DarunsikkhalaiTimeTableApp */ = {
 			isa = PBXGroup;
 			children = (
-				48DAB9A41C79C39900B47CB3 /* Main.storyboard */,
-				48F5051E1C78A78E00B96462 /* login.storyboard */,
-				48D3E8DD1C60E8C5002C239E /* LaunchScreen.storyboard */,
-				48D3E8D41C60E8C5002C239E /* AppDelegate.swift */,
-				48D3E8D61C60E8C5002C239E /* ViewController.swift */,
-				480450E21C61F6B2001D7627 /* TimeTable.swift */,
-				481F8DE21C7B2F0E007E4FF6 /* timeTableM5.swift */,
-				481F8DE01C7B2EEA007E4FF6 /* timeTableM4.swift */,
-				487E9A331CCA845A00912CCC /* addClass */,
-				487E9A301CCA815100912CCC /* Edit */,
-				48BFC4B81C76BD5000F8192B /* Detail */,
-				48BFC4B91C76BD5D00F8192B /* Conclude */,
-				48BFC4B71C76BD4200F8192B /* 3m */,
-				48BFC4B61C76BD2300F8192B /* history */,
+				485619FA1CCE134100F4F8A0 /* storyboard */,
+				485619F91CCE132800F4F8A0 /* viewController */,
+				48F563731C67613C001493EF /* image */,
 				48D3E8DB1C60E8C5002C239E /* Assets.xcassets */,
 				48D3E8E01C60E8C5002C239E /* Info.plist */,
 			);
@@ -240,7 +201,6 @@
 				481BF95E1C61243E00EF80B3 /* 110642007.jpeg */,
 			);
 			name = image;
-			path = DarunsikkhalaiTimeTableApp;
 			sourceTree = "<group>";
 		};
 		FB1F2C94F22B0F40D8DDB528 /* Frameworks */ = {
@@ -323,6 +283,7 @@
 				TargetAttributes = {
 					48D3E8D01C60E8C5002C239E = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 4KLTTX9VNA;
 					};
 					48D3E8E41C60E8C5002C239E = {
 						CreatedOnToolsVersion = 7.2;
@@ -362,13 +323,8 @@
 				48D3E8DF1C60E8C5002C239E /* LaunchScreen.storyboard in Resources */,
 				48D3E8DC1C60E8C5002C239E /* Assets.xcassets in Resources */,
 				48F5051F1C78A78E00B96462 /* login.storyboard in Resources */,
-				487E9A391CCA894900912CCC /* history.storyboard in Resources */,
 				48DAB9A61C79C39900B47CB3 /* Main.storyboard in Resources */,
-				487E9A321CCA818000912CCC /* edit.storyboard in Resources */,
-				48BFC4B31C76BCB200F8192B /* conclude.storyboard in Resources */,
-				48BFC4AF1C76BC1700F8192B /* 3M.storyboard in Resources */,
 				481BF95F1C61243E00EF80B3 /* 110642007.jpeg in Resources */,
-				487E9A351CCA847200912CCC /* Storyboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -592,10 +548,13 @@
 			baseConfigurationReference = 18C3413FF4B8BDD1EE7A6030 /* Pods-DarunsikkhalaiTimeTableApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = DarunsikkhalaiTimeTableApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Hadespipe.DarunsikkhalaiTimeTableApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -604,10 +563,13 @@
 			baseConfigurationReference = 26A91F2826858F995CD9BCEF /* Pods-DarunsikkhalaiTimeTableApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = DarunsikkhalaiTimeTableApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Hadespipe.DarunsikkhalaiTimeTableApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
