@@ -10,6 +10,52 @@ import UIKit
 import Parse
 
 class ViewController: UIViewController {
+    
+    
+    func checkLocal(classname:String)->Void{
+        let query = PFQuery(className: classname)
+        query.limit = 1000
+        query.fromLocalDatastore()
+        query.findObjectsInBackgroundWithBlock { (object, error) -> Void in
+            if error == nil{
+                if let objects = object{
+                    print("object capacity is \(objects.capacity)")
+                    for object in objects{
+                        print(object)
+                    }
+                }
+            }else{
+                print(error)
+            }
+        }
+    }
+    
+    func topicScheduleRetrieve (completion: (objectId:String,placeId:String,topicId:String,date:String,timeStartId:String,timeStopId:String,detail:String,tools:String) -> Void){
+        var keepAlive = true
+        let test:PFQuery = PFQuery(className: "Topic_Schedule")
+        test.limit = 1000
+        test.findObjectsInBackgroundWithBlock{(objects, error) -> Void in
+            
+            if error == nil
+            {
+                
+                if let objects = objects
+                {
+                    print(objects.capacity)
+                    for object in objects{
+                        completion(objectId: object.objectId! as String, placeId: object["Place"].objectId!!, topicId: object["TopicID"].objectId!!, date: object["Date"] as! String, timeStartId: object["Time_start"].objectId!!, timeStopId: object["Time_stop"].objectId!!, detail: object["Detail"] as! String, tools: object["Tools"] as! String
+                        )
+                        keepAlive = false
+                    }
+                }
+            }
+        }
+        
+        let runLoop = NSRunLoop.currentRunLoop()
+        while keepAlive && runLoop.runMode(NSDefaultRunLoopMode, beforeDate: NSDate(timeIntervalSinceNow: 0.1)) {
+            print("x")
+        }
+    }
 
     
     @IBOutlet var userTextField: UITextField!
@@ -64,15 +110,15 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+
     
         // Do any additional setup after loading the view, typically from a nib.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 
 
 }
+
+
 

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		480450E31C61F6B2001D7627 /* TimeTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480450E21C61F6B2001D7627 /* TimeTable.swift */; };
+		480450E31C61F6B2001D7627 /* TimeTableM6.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480450E21C61F6B2001D7627 /* TimeTableM6.swift */; };
 		480450E51C6227C2001D7627 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 480450E41C6227C2001D7627 /* libsqlite3.tbd */; };
 		481BF95F1C61243E00EF80B3 /* 110642007.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 481BF95E1C61243E00EF80B3 /* 110642007.jpeg */; };
 		481F8DE11C7B2EEA007E4FF6 /* timeTableM4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481F8DE01C7B2EEA007E4FF6 /* timeTableM4.swift */; };
@@ -47,7 +47,7 @@
 /* Begin PBXFileReference section */
 		18C3413FF4B8BDD1EE7A6030 /* Pods-DarunsikkhalaiTimeTableApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DarunsikkhalaiTimeTableApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DarunsikkhalaiTimeTableApp/Pods-DarunsikkhalaiTimeTableApp.debug.xcconfig"; sourceTree = "<group>"; };
 		26A91F2826858F995CD9BCEF /* Pods-DarunsikkhalaiTimeTableApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DarunsikkhalaiTimeTableApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-DarunsikkhalaiTimeTableApp/Pods-DarunsikkhalaiTimeTableApp.release.xcconfig"; sourceTree = "<group>"; };
-		480450E21C61F6B2001D7627 /* TimeTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeTable.swift; sourceTree = "<group>"; usesTabs = 0; };
+		480450E21C61F6B2001D7627 /* TimeTableM6.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeTableM6.swift; sourceTree = "<group>"; usesTabs = 0; };
 		480450E41C6227C2001D7627 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		481BF95E1C61243E00EF80B3 /* 110642007.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 110642007.jpeg; sourceTree = "<group>"; };
 		481F8DE01C7B2EEA007E4FF6 /* timeTableM4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = timeTableM4.swift; sourceTree = "<group>"; };
@@ -114,11 +114,11 @@
 			children = (
 				48D3E8D41C60E8C5002C239E /* AppDelegate.swift */,
 				48D3E8D61C60E8C5002C239E /* ViewController.swift */,
-				480450E21C61F6B2001D7627 /* TimeTable.swift */,
+				480450E21C61F6B2001D7627 /* TimeTableM6.swift */,
 				481F8DE21C7B2F0E007E4FF6 /* timeTableM5.swift */,
 				481F8DE01C7B2EEA007E4FF6 /* timeTableM4.swift */,
-				48F5636F1C67608D001493EF /* conclude.swift */,
 				48E620251C67547400593F0E /* threeView.swift */,
+				48F5636F1C67608D001493EF /* conclude.swift */,
 				48F563711C6760E5001493EF /* history.swift */,
 				484951C51C6677140005D89A /* detailUIViewController.swift */,
 			);
@@ -402,7 +402,7 @@
 				48E620261C67547400593F0E /* threeView.swift in Sources */,
 				48F563701C67608D001493EF /* conclude.swift in Sources */,
 				481F8DE11C7B2EEA007E4FF6 /* timeTableM4.swift in Sources */,
-				480450E31C61F6B2001D7627 /* TimeTable.swift in Sources */,
+				480450E31C61F6B2001D7627 /* TimeTableM6.swift in Sources */,
 				481F8DE31C7B2F0E007E4FF6 /* timeTableM5.swift in Sources */,
 				48D3E8D51C60E8C5002C239E /* AppDelegate.swift in Sources */,
 				484951C61C6677140005D89A /* detailUIViewController.swift in Sources */,

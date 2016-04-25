@@ -11,6 +11,32 @@ import Parse
 
 class TimeTable: UIViewController {
     
+    
+    func classRetrive (completion: (objectId:String, classId:String, noClass: Int) -> Void){
+        var keepAlive = true
+        let test:PFQuery = PFQuery(className: "Class_FK")
+        test.limit = 1000
+        test.findObjectsInBackgroundWithBlock{(objects, error) -> Void in
+            
+            if error == nil
+            {
+                
+                if let objects = objects
+                {
+                    for object in objects{
+                        completion(objectId: object.objectId! as String, classId: object["Class"] as! String, noClass: object["No_class"] as! Int)
+                        keepAlive = false
+                    }
+                }
+            }
+        }
+        
+        let runLoop = NSRunLoop.currentRunLoop()
+        while keepAlive && runLoop.runMode(NSDefaultRunLoopMode, beforeDate: NSDate(timeIntervalSinceNow: 0.1)) {
+            print("x")
+        }
+    }
+
     @IBOutlet var conclude: UITabBarItem!
     @IBOutlet var m4Button: UITabBar!
     @IBOutlet var m5Button: UITabBarItem!
@@ -605,9 +631,39 @@ class TimeTable: UIViewController {
     var timeStart = String()
     var timeStop = String()
     override func viewWillAppear(animated: Bool) {
+        
         //        let user = PFUser.currentUser()
         //        print(user)
         super.viewWillAppear(true)
+        
+        //_______________________________________________________________________________________
+        
+        
+        
+        
+                classRetrive { (objectId, classId, noClass) -> Void in
+                    print(objectId, classId, noClass)
+                    let classTable = PFObject(className: "Class_FK")
+                    classTable.objectId = objectId
+                    classTable["Class"] = classId
+                    classTable["No_class"] = noClass
+                    classTable.pinInBackground()
+                }
+//        let  test  = PFObject(className: "test")
+//        test.objectId = "ffff"
+//        test.pinInBackground()
+        
+        
+        
+        
+        
+        
+        checkLocal("test")
+        
+        
+        
+        
+        //_______________________________________________________________________________________
         
         let day:[String] = [mondayDate.text!,tuesdayDate.text!,wednesdayDate.text!,thursdayDate.text!,fridayDate.text!]
         //        subjectThisWeek(day) { (objectId, date, timeStartId, timeStopId,topicId) -> Void in
@@ -906,8 +962,28 @@ class TimeTable: UIViewController {
         
         super.viewDidLoad()
         
+//        topicScheduleRetrive { (objectId, placeId, topicId, date, timeStartId, timeStopId, detail, tools) in
+//            print(objectId, placeId, topicId, date, timeStartId, timeStopId, detail, tools)
+//            let topicSchedule = PFObject(className: "Topic_Schedule")
+//            topicSchedule.objectId = objectId
+//            topicSchedule["Place"] = placeId
+//            topicSchedule["TopicId"] = topicId
+//            topicSchedule["Date"] = date
+//            topicSchedule["timeStartId"] = timeStartId
+//            topicSchedule["timeStopId"] = timeStopId
+//            topicSchedule["Detail"] = detail
+//            topicSchedule["Tools"] = tools
+//            topicSchedule.pinInBackground()
+//        }
         
-        
+        //        topicTeacherRetrive { (objectId, teacherId, topicScheduleId) -> Void in
+        //            print(objectId, teacherId, topicScheduleId)
+        //            let topicTeacher = PFObject(className: "Topic_Teacher")
+        //            topicTeacher.objectId = objectId
+        //            topicTeacher["Teacher"] = teacherId
+        //            topicTeacher["TopicScheduleID"] = topicScheduleId
+        //            topicTeacher.pinInBackground()
+        //        }
         
          checkLocal("Topic_Schedule")
         
@@ -1342,30 +1418,30 @@ func placeRetrive (completion: (objectId:String, noPlace:Int, place:String) -> V
         print("x")
     }
 }
-func classRetrive (completion: (objectId:String, classId:String, noClass: Int) -> Void){
-    var keepAlive = true
-    let test:PFQuery = PFQuery(className: "Class_FK")
-    test.limit = 1000
-    test.findObjectsInBackgroundWithBlock{(objects, error) -> Void in
-        
-        if error == nil
-        {
-            
-            if let objects = objects
-            {
-                for object in objects{
-                    completion(objectId: object.objectId! as String, classId: object["Class"] as! String, noClass: object["No_class"] as! Int)
-                    keepAlive = false
-                }
-            }
-        }
-    }
-    
-    let runLoop = NSRunLoop.currentRunLoop()
-    while keepAlive && runLoop.runMode(NSDefaultRunLoopMode, beforeDate: NSDate(timeIntervalSinceNow: 0.1)) {
-        print("x")
-    }
-}
+//func classRetrive (completion: (objectId:String, classId:String, noClass: Int) -> Void){
+//    var keepAlive = true
+//    let test:PFQuery = PFQuery(className: "Class_FK")
+//    test.limit = 1000
+//    test.findObjectsInBackgroundWithBlock{(objects, error) -> Void in
+//        
+//        if error == nil
+//        {
+//            
+//            if let objects = objects
+//            {
+//                for object in objects{
+//                    completion(objectId: object.objectId! as String, classId: object["Class"] as! String, noClass: object["No_class"] as! Int)
+//                    keepAlive = false
+//                }
+//            }
+//        }
+//    }
+//    
+//    let runLoop = NSRunLoop.currentRunLoop()
+//    while keepAlive && runLoop.runMode(NSDefaultRunLoopMode, beforeDate: NSDate(timeIntervalSinceNow: 0.1)) {
+//        print("x")
+//    }
+//}
 
 func topicScheduleRetrive (completion: (objectId:String,placeId:String,topicId:String,date:String,timeStartId:String,timeStopId:String,detail:String,tools:String) -> Void){
     var keepAlive = true
