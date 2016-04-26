@@ -128,14 +128,10 @@ class TimeTable: UIViewController {
             fridayDate.text = adaptDateString(-2+(count*7))
         default :
             print("Error")
-            
         }
+        
         let day:[String] = [mondayDate.text!,tuesdayDate.text!,wednesdayDate.text!,thursdayDate.text!,fridayDate.text!]
-        print(mondayDate.text)
-        print(day)
-        //การเปิดตารางเรียน
-        //โชว์คาบ
-        let subject = PFQuery(className: "Topic_Schedule")
+        let subject = PFQuery(className: "HT_Topic_Schedule")
         subject.fromLocalDatastore()
         subject.whereKey("Date", containedIn: day)
         subject.findObjectsInBackgroundWithBlock { (object, error) -> Void in
@@ -143,17 +139,23 @@ class TimeTable: UIViewController {
                 if let objects = object{
                     print(objects.capacity)
                     for object in objects{
-                        //print(object)
+                        print(object)
                         //เปิดเวลา และ topicId
-                        let subjectObjectId = object["objectId"]
-                        let timeStart = object["Time_start"] as AnyObject
+                        let subjectObjectId = object.objectId!
                         
-                        let timeStop = object["Time_stop"] as! String
-                        let topicId = object["TopicID"]
+                        
+                        let timeStart = object["timeStartId"] as! String
+                        
+                        
+                        let timeStop = object["timeStopId"]  as! String
+                        
+                        let topicId = object["TopicId"]
                         let date = object["Date"]
+                        
+                        
                         //print(timeStart,timeStop,topicId)
-                        print("TimeStart = \(timeStart),TimeStop = \(timeStop)")
-                        let timeQuery = PFQuery(className: "Time_FK")
+                        print("TimeStart = \(timeStart),TimeStop = \(timeStop), TopicId = \(topicId)")
+                        let timeQuery = PFQuery(className: "HT_Time_FK")
                         timeQuery.fromLocalDatastore()
                         //timeQuery.whereKey("objectId", equalTo: timeStop)
                         timeQuery.findObjectsInBackgroundWithBlock({ (object, error) -> Void in
@@ -161,13 +163,13 @@ class TimeTable: UIViewController {
                                 if let objects = object{
                                     //print(objects.capacity)
                                     for object in objects{
-                                        if (timeStart as! String as String) as String == object["objectId"] as! String{
+                                        if timeStart    == object.objectId!  {
                                             
                                             //อยู่คาบเช้า
                                             let period = timeConvert(object["Time"] as! String)
                                             //let endPeriod = timeConvert()
                                             
-                                            let topic = PFQuery(className: "Topic")
+                                            let topic = PFQuery(className: "HT_Topic")
                                             topic.fromLocalDatastore()
                                             //topic.whereKey("objectId", equalTo: topicId)
                                             topic.findObjectsInBackgroundWithBlock({ (object, error) -> Void in
@@ -175,20 +177,21 @@ class TimeTable: UIViewController {
                                                     if let objects = object{
                                                         print(objects.capacity)
                                                         for object in objects{
-                                                            if object["objectId"] as! String == topicId as! String{
+                                                            if object.objectId! == topicId as! String{
                                                                 let topicName = object["Topic_Name"]
                                                                 
                                                                 let subjectCode = object["SubjectCode"]
-                                                                let subjectQuery = PFQuery(className: "Subject")
+                                                                let subjectQuery = PFQuery(className: "HT_Subject")
                                                                 subjectQuery.fromLocalDatastore()
                                                                 subjectQuery.findObjectsInBackgroundWithBlock({ (object, error) -> Void in
                                                                     if error == nil{
                                                                         if let objects = object{
                                                                             for object in objects{
-                                                                                if subjectCode as! String == object["objectId"] as! String{
-                                                                                    let classId = object["Class"] as! String
+                                                                                if subjectCode as! String == object.objectId! {
+                                                                                    print(object["Class"].objectId)
+                                                                                    let classId = object["Class"].objectId!
                                                                                     var theirClass = String()
-                                                                                    switch classId{
+                                                                                    switch classId!{
                                                                                     case "Jdr0Rowr8p":
                                                                                         theirClass = "m.6"
                                                                                     case "exv130NBiY":
@@ -201,7 +204,7 @@ class TimeTable: UIViewController {
                                                                                     
                                                                                     
                                                                                     
-                                                                                    print("\(topicName) in (\(date)) is \(period) =  \(object["objectId"])   \(theirClass)")
+                                                                                    print("\(topicName) in (\(date)) is \(period) =  \(object.objectId)   \(theirClass)")
                                                                                     if self.mondayDate.text! == date as! String && theirClass == "m.6" && period == "M"{
                                                                                         self.mondayClassMorning.setTitle(topicName as? String, forState: .Normal)
                                                                                     }
@@ -234,13 +237,13 @@ class TimeTable: UIViewController {
                                                                                     }
                                                                                     
                                                                                     //teacher
-                                                                                    let teacher = PFQuery(className: "Topic_Teacher")
+                                                                                    let teacher = PFQuery(className: "HT_Topic_Teacher")
                                                                                     teacher.fromLocalDatastore()
                                                                                     teacher.findObjectsInBackgroundWithBlock { (object, error) -> Void in
                                                                                         if error == nil{
                                                                                             if let objects = object{
                                                                                                 for object in objects{
-                                                                                                    if object["TopicScheduleID"] as! String == subjectObjectId as! String{
+                                                                                                    if object["TopicScheduleID"] as! String == subjectObjectId {
                                                                                                         let teacherId = object["Teacher"]
                                                                                                         let teacherUser = PFQuery(className: "User")
                                                                                                         teacherUser.fromLocalDatastore()
@@ -248,7 +251,7 @@ class TimeTable: UIViewController {
                                                                                                             if error == nil{
                                                                                                                 if let objects = object{
                                                                                                                     for object in objects{
-                                                                                                                        if object["objectId"] as! String == teacherId as! String{
+                                                                                                                        if object.objectId!  == teacherId as! String{
                                                                                                                             print("I'm \(object["namelist"]) teach \(topicName)")
                                                                                                                             let teacherName = object["namelist"]
                                                                                                                             if self.mondayDate.text! == date as! String && theirClass == "m.6" && period == "M"{
@@ -325,7 +328,7 @@ class TimeTable: UIViewController {
                 print(error)
             }
         }
-        
+
         
         viewDidLoad()
         print(mondayDate.text)
@@ -389,8 +392,9 @@ class TimeTable: UIViewController {
         default :
             print("Error")
         }
+        
         let day:[String] = [mondayDate.text!,tuesdayDate.text!,wednesdayDate.text!,thursdayDate.text!,fridayDate.text!]
-        let subject = PFQuery(className: "Topic_Schedule")
+        let subject = PFQuery(className: "HT_Topic_Schedule")
         subject.fromLocalDatastore()
         subject.whereKey("Date", containedIn: day)
         subject.findObjectsInBackgroundWithBlock { (object, error) -> Void in
@@ -398,17 +402,23 @@ class TimeTable: UIViewController {
                 if let objects = object{
                     print(objects.capacity)
                     for object in objects{
-                        //print(object)
+                        print(object)
                         //เปิดเวลา และ topicId
-                        let subjectObjectId = object["objectId"]
-                        let timeStart = object["Time_start"] as AnyObject
+                        let subjectObjectId = object.objectId!
+                       
                         
-                        let timeStop = object["Time_stop"] as! String
-                        let topicId = object["TopicID"]
+                        let timeStart = object["timeStartId"] as! String
+                     
+                        
+                        let timeStop = object["timeStopId"]  as! String
+                     
+                        let topicId = object["TopicId"]
                         let date = object["Date"]
+                        
+                      
                         //print(timeStart,timeStop,topicId)
-                        print("TimeStart = \(timeStart),TimeStop = \(timeStop)")
-                        let timeQuery = PFQuery(className: "Time_FK")
+                        print("TimeStart = \(timeStart),TimeStop = \(timeStop), TopicId = \(topicId)")
+                        let timeQuery = PFQuery(className: "HT_Time_FK")
                         timeQuery.fromLocalDatastore()
                         //timeQuery.whereKey("objectId", equalTo: timeStop)
                         timeQuery.findObjectsInBackgroundWithBlock({ (object, error) -> Void in
@@ -416,13 +426,13 @@ class TimeTable: UIViewController {
                                 if let objects = object{
                                     //print(objects.capacity)
                                     for object in objects{
-                                        if (timeStart as! String as String) as String == object["objectId"] as! String{
+                                        if timeStart    == object.objectId!  {
                                             
                                             //อยู่คาบเช้า
                                             let period = timeConvert(object["Time"] as! String)
                                             //let endPeriod = timeConvert()
                                             
-                                            let topic = PFQuery(className: "Topic")
+                                            let topic = PFQuery(className: "HT_Topic")
                                             topic.fromLocalDatastore()
                                             //topic.whereKey("objectId", equalTo: topicId)
                                             topic.findObjectsInBackgroundWithBlock({ (object, error) -> Void in
@@ -430,20 +440,21 @@ class TimeTable: UIViewController {
                                                     if let objects = object{
                                                         print(objects.capacity)
                                                         for object in objects{
-                                                            if object["objectId"] as! String == topicId as! String{
+                                                            if object.objectId! == topicId as! String{
                                                                 let topicName = object["Topic_Name"]
                                                                 
                                                                 let subjectCode = object["SubjectCode"]
-                                                                let subjectQuery = PFQuery(className: "Subject")
+                                                                let subjectQuery = PFQuery(className: "HT_Subject")
                                                                 subjectQuery.fromLocalDatastore()
                                                                 subjectQuery.findObjectsInBackgroundWithBlock({ (object, error) -> Void in
                                                                     if error == nil{
                                                                         if let objects = object{
                                                                             for object in objects{
-                                                                                if subjectCode as! String == object["objectId"] as! String{
-                                                                                    let classId = object["Class"] as! String
+                                                                                if subjectCode as! String == object.objectId! {
+                                                                                    print(object["Class"].objectId)
+                                                                                    let classId = object["Class"].objectId!
                                                                                     var theirClass = String()
-                                                                                    switch classId{
+                                                                                    switch classId!{
                                                                                     case "Jdr0Rowr8p":
                                                                                         theirClass = "m.6"
                                                                                     case "exv130NBiY":
@@ -456,7 +467,7 @@ class TimeTable: UIViewController {
                                                                                     
                                                                                     
                                                                                     
-                                                                                    print("\(topicName) in (\(date)) is \(period) =  \(object["objectId"])   \(theirClass)")
+                                                                                    print("\(topicName) in (\(date)) is \(period) =  \(object.objectId)   \(theirClass)")
                                                                                     if self.mondayDate.text! == date as! String && theirClass == "m.6" && period == "M"{
                                                                                         self.mondayClassMorning.setTitle(topicName as? String, forState: .Normal)
                                                                                     }
@@ -489,13 +500,13 @@ class TimeTable: UIViewController {
                                                                                     }
                                                                                     
                                                                                     //teacher
-                                                                                    let teacher = PFQuery(className: "Topic_Teacher")
+                                                                                    let teacher = PFQuery(className: "HT_Topic_Teacher")
                                                                                     teacher.fromLocalDatastore()
                                                                                     teacher.findObjectsInBackgroundWithBlock { (object, error) -> Void in
                                                                                         if error == nil{
                                                                                             if let objects = object{
                                                                                                 for object in objects{
-                                                                                                    if object["TopicScheduleID"] as! String == subjectObjectId as! String{
+                                                                                                    if object["TopicScheduleID"] as! String == subjectObjectId {
                                                                                                         let teacherId = object["Teacher"]
                                                                                                         let teacherUser = PFQuery(className: "User")
                                                                                                         teacherUser.fromLocalDatastore()
@@ -503,7 +514,7 @@ class TimeTable: UIViewController {
                                                                                                             if error == nil{
                                                                                                                 if let objects = object{
                                                                                                                     for object in objects{
-                                                                                                                        if object["objectId"] as! String == teacherId as! String{
+                                                                                                                        if object.objectId!  == teacherId as! String{
                                                                                                                             print("I'm \(object["namelist"]) teach \(topicName)")
                                                                                                                             let teacherName = object["namelist"]
                                                                                                                             if self.mondayDate.text! == date as! String && theirClass == "m.6" && period == "M"{
@@ -638,29 +649,82 @@ class TimeTable: UIViewController {
         
         //_______________________________________________________________________________________
         
+  
+
+
+        
+//        countLocal("HT_Term_FK")
+//        countLocal("HT_Class_FK")
+//        countLocal("HT_Time_FK")
+//        countLocal("HT_Subject")
+//        countLocal("HT_Place_FK")
+//        countLocal("User")
+//        countLocal("HT_Topic")
+//        countLocal("HT_Topic_Teacher")
+//        
+//
+//                timeRetrive { (objectId, time) -> Void in
+//                    print(objectId, time)
+//                    let timeTable = PFObject(className: "HT_Time_FK")
+//                    timeTable.objectId = objectId
+//                    timeTable["Time"] = time
+//                    timeTable.pinInBackground()
+//                }
+//                subjectRetrive { (objectId, classId, info, subject, termId) -> Void in
+//                    print(objectId, classId, info, subject, termId)
+//                    let subTable = PFObject(className: "HT_Subject")
+//                    subTable.objectId = objectId
+//                    subTable["Class"] = classId
+//                    subTable["Info"] = info
+//                    subTable["Subject"] = subject
+//                    subTable["Term"] = termId
+//                    subTable.pinInBackground()
+//                }
+//                placeRetrive { (objectId, noPlace, place) -> Void in
+//                    print(objectId, noPlace, place)
+//                    let placeTable = PFObject(className: "HT_Place_FK")
+//                    placeTable.objectId = objectId
+//                    placeTable["No_place"] = noPlace
+//                    placeTable["Place_name"] = place
+//                    placeTable.pinInBackground()
+//                }
+//                userRetrive { (objectId, namelist, classId, email) -> Void in
+//                    print(objectId, namelist, classId, email)
+//                    let userTable = PFObject(className: "HT_User")
+//                    userTable.objectId = objectId
+//                    userTable["namelist"] = namelist
+//                    userTable["class"] = classId
+//                    userTable["email"] = email
+//                    userTable.pinInBackground()
+//                }
+//                classRetrive { (objectId, classId, noClass) -> Void in
+//                    print(objectId, classId, noClass)
+//                    let classTable = PFObject(className: "HT_Class_FK")
+//                    classTable.objectId = objectId
+//                    classTable["Class"] = classId
+//                    classTable["No_class"] = noClass
+//                    classTable.pinInBackground()
+//                }
+//                topicRetrive { (objectId, detail, subjectCodeId, topicName) -> Void in
+//                    print(objectId, detail, subjectCodeId, topicName)
+//                    let topic = PFObject(className: "HT_Topic")
+//                    topic.objectId = objectId
+//                    topic["Detail"] = detail
+//                    topic["SubjectCode"] = subjectCodeId
+//                    topic["Topic_Name"] = topicName
+//                    topic.pinInBackground()
+//                }
+//                topicTeacherRetrive { (objectId, teacherId, topicScheduleId) -> Void in
+//                    print(objectId, teacherId, topicScheduleId)
+//                    let topicTeacher = PFObject(className: "HT_Topic_Teacher")
+//                    topicTeacher.objectId = objectId
+//                    topicTeacher["Teacher"] = teacherId
+//                    topicTeacher["TopicScheduleID"] = topicScheduleId
+//                    topicTeacher.pinInBackground()
+//                }
         
         
-        
-                classRetrive { (objectId, classId, noClass) -> Void in
-                    print(objectId, classId, noClass)
-                    let classTable = PFObject(className: "Class_FK")
-                    classTable.objectId = objectId
-                    classTable["Class"] = classId
-                    classTable["No_class"] = noClass
-                    classTable.pinInBackground()
-                }
-//        let  test  = PFObject(className: "test")
-//        test.objectId = "ffff"
-//        test.pinInBackground()
-        
-        
-        
-        
-        
-        
-        checkLocal("test")
-        
-        
+        //clearLocal("HT_Topic_Schedule")
         
         
         //_______________________________________________________________________________________
@@ -699,7 +763,7 @@ class TimeTable: UIViewController {
         print(day)
         //การเปิดตารางเรียน
         //โชว์คาบ
-        let subject = PFQuery(className: "Topic_Schedule")
+        let subject = PFQuery(className: "HT_Topic_Schedule")
         subject.fromLocalDatastore()
         subject.whereKey("Date", containedIn: day)
         subject.findObjectsInBackgroundWithBlock { (object, error) -> Void in
@@ -707,17 +771,23 @@ class TimeTable: UIViewController {
                 if let objects = object{
                     print(objects.capacity)
                     for object in objects{
-                        //print(object)
+                        print(object)
                         //เปิดเวลา และ topicId
-                        let subjectObjectId = object["objectId"]
-                        let timeStart = object["Time_start"] as AnyObject
+                        let subjectObjectId = object.objectId!
                         
-                        let timeStop = object["Time_stop"] as! String
-                        let topicId = object["TopicID"]
+                        
+                        let timeStart = object["timeStartId"] as! String
+                        
+                        
+                        let timeStop = object["timeStopId"]  as! String
+                        
+                        let topicId = object["TopicId"]
                         let date = object["Date"]
+                        
+                        
                         //print(timeStart,timeStop,topicId)
-                        print("TimeStart = \(timeStart),TimeStop = \(timeStop)")
-                        let timeQuery = PFQuery(className: "Time_FK")
+                        print("TimeStart = \(timeStart),TimeStop = \(timeStop), TopicId = \(topicId)")
+                        let timeQuery = PFQuery(className: "HT_Time_FK")
                         timeQuery.fromLocalDatastore()
                         //timeQuery.whereKey("objectId", equalTo: timeStop)
                         timeQuery.findObjectsInBackgroundWithBlock({ (object, error) -> Void in
@@ -725,13 +795,13 @@ class TimeTable: UIViewController {
                                 if let objects = object{
                                     //print(objects.capacity)
                                     for object in objects{
-                                        if (timeStart as! String as String) as String == object["objectId"] as! String{
+                                        if timeStart    == object.objectId!  {
                                             
                                             //อยู่คาบเช้า
                                             let period = timeConvert(object["Time"] as! String)
                                             //let endPeriod = timeConvert()
                                             
-                                            let topic = PFQuery(className: "Topic")
+                                            let topic = PFQuery(className: "HT_Topic")
                                             topic.fromLocalDatastore()
                                             //topic.whereKey("objectId", equalTo: topicId)
                                             topic.findObjectsInBackgroundWithBlock({ (object, error) -> Void in
@@ -739,20 +809,21 @@ class TimeTable: UIViewController {
                                                     if let objects = object{
                                                         print(objects.capacity)
                                                         for object in objects{
-                                                            if object["objectId"] as! String == topicId as! String{
+                                                            if object.objectId! == topicId as! String{
                                                                 let topicName = object["Topic_Name"]
                                                                 
                                                                 let subjectCode = object["SubjectCode"]
-                                                                let subjectQuery = PFQuery(className: "Subject")
+                                                                let subjectQuery = PFQuery(className: "HT_Subject")
                                                                 subjectQuery.fromLocalDatastore()
                                                                 subjectQuery.findObjectsInBackgroundWithBlock({ (object, error) -> Void in
                                                                     if error == nil{
                                                                         if let objects = object{
                                                                             for object in objects{
-                                                                                if subjectCode as! String == object["objectId"] as! String{
-                                                                                    let classId = object["Class"] as! String
+                                                                                if subjectCode as! String == object.objectId! {
+                                                                                    print(object["Class"].objectId)
+                                                                                    let classId = object["Class"].objectId!
                                                                                     var theirClass = String()
-                                                                                    switch classId{
+                                                                                    switch classId!{
                                                                                     case "Jdr0Rowr8p":
                                                                                         theirClass = "m.6"
                                                                                     case "exv130NBiY":
@@ -765,7 +836,7 @@ class TimeTable: UIViewController {
                                                                                     
                                                                                     
                                                                                     
-                                                                                    print("\(topicName) in (\(date)) is \(period) =  \(object["objectId"])   \(theirClass)")
+                                                                                    print("\(topicName) in (\(date)) is \(period) =  \(object.objectId)   \(theirClass)")
                                                                                     if self.mondayDate.text! == date as! String && theirClass == "m.6" && period == "M"{
                                                                                         self.mondayClassMorning.setTitle(topicName as? String, forState: .Normal)
                                                                                     }
@@ -798,13 +869,13 @@ class TimeTable: UIViewController {
                                                                                     }
                                                                                     
                                                                                     //teacher
-                                                                                    let teacher = PFQuery(className: "Topic_Teacher")
+                                                                                    let teacher = PFQuery(className: "HT_Topic_Teacher")
                                                                                     teacher.fromLocalDatastore()
                                                                                     teacher.findObjectsInBackgroundWithBlock { (object, error) -> Void in
                                                                                         if error == nil{
                                                                                             if let objects = object{
                                                                                                 for object in objects{
-                                                                                                    if object["TopicScheduleID"] as! String == subjectObjectId as! String{
+                                                                                                    if object["TopicScheduleID"] as! String == subjectObjectId {
                                                                                                         let teacherId = object["Teacher"]
                                                                                                         let teacherUser = PFQuery(className: "User")
                                                                                                         teacherUser.fromLocalDatastore()
@@ -812,7 +883,7 @@ class TimeTable: UIViewController {
                                                                                                             if error == nil{
                                                                                                                 if let objects = object{
                                                                                                                     for object in objects{
-                                                                                                                        if object["objectId"] as! String == teacherId as! String{
+                                                                                                                        if object.objectId!  == teacherId as! String{
                                                                                                                             print("I'm \(object["namelist"]) teach \(topicName)")
                                                                                                                             let teacherName = object["namelist"]
                                                                                                                             if self.mondayDate.text! == date as! String && theirClass == "m.6" && period == "M"{
@@ -892,8 +963,6 @@ class TimeTable: UIViewController {
         
         
         
-        
-        
     }
     
     
@@ -904,7 +973,7 @@ class TimeTable: UIViewController {
     //ต้นแบบการรับค่า
     func test (completion: (classid:String, info:String) -> Void){
         var keepAlive = true
-        let test:PFQuery = PFQuery(className: "Subject")
+        let test:PFQuery = PFQuery(className: "HT_Subject")
         //test.whereKey("Info", equalTo: "English")
         test.findObjectsInBackgroundWithBlock{(objects, error) -> Void in
             
@@ -938,7 +1007,7 @@ class TimeTable: UIViewController {
         query.findObjectsInBackgroundWithBlock { (object, error) -> Void in
             if error == nil{
                 if let objects = object{
-                    print("object capacity is \(objects.capacity)")
+                    print("\(classname)'s capacity is \(objects.capacity)")
                     for object in objects{
                         print(object)
                     }
@@ -950,6 +1019,38 @@ class TimeTable: UIViewController {
     }
     
     
+    func clearLocal(classname:String)->Void{
+        let query = PFQuery(className: classname)
+        query.limit = 1000
+        query.fromLocalDatastore()
+        query.findObjectsInBackgroundWithBlock { (object, error) -> Void in
+            if error == nil{
+                if let objects = object{
+                    print("\(classname)'s capacity is \(objects.capacity)")
+                    for object in objects{
+                        object.unpinInBackground()
+                    }
+                }
+            }else{
+                print(error)
+            }
+        }
+    }
+    func countLocal(classname:String)->Void{
+        let query = PFQuery(className: classname)
+        query.limit = 1000
+        query.fromLocalDatastore()
+        query.findObjectsInBackgroundWithBlock { (object, error) -> Void in
+            if error == nil{
+                if let objects = object{
+                    print("\(classname)'s capacity is \(objects.capacity)")
+                    
+                }
+            }else{
+                print(error)
+            }
+        }
+    }
     
     
     
@@ -962,19 +1063,7 @@ class TimeTable: UIViewController {
         
         super.viewDidLoad()
         
-//        topicScheduleRetrive { (objectId, placeId, topicId, date, timeStartId, timeStopId, detail, tools) in
-//            print(objectId, placeId, topicId, date, timeStartId, timeStopId, detail, tools)
-//            let topicSchedule = PFObject(className: "Topic_Schedule")
-//            topicSchedule.objectId = objectId
-//            topicSchedule["Place"] = placeId
-//            topicSchedule["TopicId"] = topicId
-//            topicSchedule["Date"] = date
-//            topicSchedule["timeStartId"] = timeStartId
-//            topicSchedule["timeStopId"] = timeStopId
-//            topicSchedule["Detail"] = detail
-//            topicSchedule["Tools"] = tools
-//            topicSchedule.pinInBackground()
-//        }
+ 
         
         //        topicTeacherRetrive { (objectId, teacherId, topicScheduleId) -> Void in
         //            print(objectId, teacherId, topicScheduleId)
@@ -985,7 +1074,7 @@ class TimeTable: UIViewController {
         //            topicTeacher.pinInBackground()
         //        }
         
-         checkLocal("Topic_Schedule")
+        // checkLocal("Topic_Schedule")
         
         
         //
@@ -1418,32 +1507,33 @@ func placeRetrive (completion: (objectId:String, noPlace:Int, place:String) -> V
         print("x")
     }
 }
-//func classRetrive (completion: (objectId:String, classId:String, noClass: Int) -> Void){
-//    var keepAlive = true
-//    let test:PFQuery = PFQuery(className: "Class_FK")
-//    test.limit = 1000
-//    test.findObjectsInBackgroundWithBlock{(objects, error) -> Void in
-//        
-//        if error == nil
-//        {
-//            
-//            if let objects = objects
-//            {
-//                for object in objects{
-//                    completion(objectId: object.objectId! as String, classId: object["Class"] as! String, noClass: object["No_class"] as! Int)
-//                    keepAlive = false
-//                }
-//            }
-//        }
-//    }
-//    
-//    let runLoop = NSRunLoop.currentRunLoop()
-//    while keepAlive && runLoop.runMode(NSDefaultRunLoopMode, beforeDate: NSDate(timeIntervalSinceNow: 0.1)) {
-//        print("x")
-//    }
-//}
+func classRetrive (completion: (objectId:String, classId:String, noClass: Int) -> Void){
+    var keepAlive = true
+    let test:PFQuery = PFQuery(className: "Class_FK")
+    test.limit = 1000
+    test.findObjectsInBackgroundWithBlock{(objects, error) -> Void in
+        
+        if error == nil
+        {
+            
+            if let objects = objects
+            {
+                for object in objects{
+                    completion(objectId: object.objectId! as String, classId: object["Class"] as! String, noClass: object["No_class"] as! Int)
+                    keepAlive = false
+                }
+            }
+        }
+    }
+    
+    let runLoop = NSRunLoop.currentRunLoop()
+    while keepAlive && runLoop.runMode(NSDefaultRunLoopMode, beforeDate: NSDate(timeIntervalSinceNow: 0.1)) {
+        print("x")
+    }
+}
 
 func topicScheduleRetrive (completion: (objectId:String,placeId:String,topicId:String,date:String,timeStartId:String,timeStopId:String,detail:String,tools:String) -> Void){
+    var count = 0
     var keepAlive = true
     let test:PFQuery = PFQuery(className: "Topic_Schedule")
     test.limit = 1000
@@ -1458,6 +1548,8 @@ func topicScheduleRetrive (completion: (objectId:String,placeId:String,topicId:S
                 for object in objects{
                     completion(objectId: object.objectId! as String, placeId: object["Place"].objectId!!, topicId: object["TopicID"].objectId!!, date: object["Date"] as! String, timeStartId: object["Time_start"].objectId!!, timeStopId: object["Time_stop"].objectId!!, detail: object["Detail"] as! String, tools: object["Tools"] as! String
                     )
+                    print(count)
+                    count += 1
                     keepAlive = false
                 }
             }
@@ -1520,7 +1612,7 @@ func morningOrAfternoon(timeStart:String,timeStop:String)->(String){
 
 func timeFromTimeFK(completion: (time:String) -> Void){
     var keepAlive = true
-    let test:PFQuery = PFQuery(className: "Time_FK")
+    let test:PFQuery = PFQuery(className: "HT_Time_FK")
     test.fromLocalDatastore()
     test.limit = 1000
     test.whereKey("objectId", equalTo: "MDD7fWwAd0")
@@ -1660,7 +1752,7 @@ print(error)
 
 func subjectThisWeek (week:[String],completion: (objectId:String,date:String,timeStartId:String,timeStopId:String,topicId:String) -> Void){
     var keepAlive = true
-    let test:PFQuery = PFQuery(className: "Topic_Schedule")
+    let test:PFQuery = PFQuery(className: "HT_Topic_Schedule")
     test.fromLocalDatastore()
     test.limit = 1000
     test.whereKey("Date", containedIn: week)
@@ -1689,7 +1781,7 @@ func subjectThisWeek (week:[String],completion: (objectId:String,date:String,tim
 
 func timeConvert (timeId:String,completion:(time:String) -> Void){
     var keepAlive = true
-    let test:PFQuery = PFQuery(className: "Time_FK")
+    let test:PFQuery = PFQuery(className: "HT_Time_FK")
     test.fromLocalDatastore()
     test.limit = 1000
     // test.whereKey("objectId", equalTo: timeId)
@@ -1733,7 +1825,7 @@ func timeToPeriod(time:String)->String{
 
 func topicLocal (topicId:String,completion:(subjectCode:String,topicName:String) -> Void){
     var keepAlive = true
-    let test:PFQuery = PFQuery(className: "Topic")
+    let test:PFQuery = PFQuery(className: "HT_Topic")
     test.fromLocalDatastore()
     test.limit = 1000
     // test.whereKey("objectId", equalTo: timeId)
@@ -1764,7 +1856,7 @@ func topicLocal (topicId:String,completion:(subjectCode:String,topicName:String)
 
 func subjectCodeToGrade (subjectCodeId:String,completion:(grade:String) -> Void){
     var keepAlive = true
-    let test:PFQuery = PFQuery(className: "Subject")
+    let test:PFQuery = PFQuery(className: "HT_Subject")
     test.fromLocalDatastore()
     test.limit = 1000
     // test.whereKey("objectId", equalTo: timeId)
@@ -1780,7 +1872,7 @@ func subjectCodeToGrade (subjectCodeId:String,completion:(grade:String) -> Void)
                 for object in objects{
                     if object["objectId"] as! String == subjectCodeId as String{
                         let classId = object["Class"] as! String
-                        let query = PFQuery(className: "Class_FK")
+                        let query = PFQuery(className: "HT_Class_FK")
                         query.fromLocalDatastore()
                         query.findObjectsInBackgroundWithBlock({ (object, error) -> Void in
                             if error == nil{
@@ -1811,7 +1903,7 @@ func subjectCodeToGrade (subjectCodeId:String,completion:(grade:String) -> Void)
 
 func teacherFromTopicId (objectId:String,completion:(teacher:String) -> Void){
     var keepAlive = true
-    let test:PFQuery = PFQuery(className: "Topic_Teacher")
+    let test:PFQuery = PFQuery(className: "HT_Topic_Teacher")
     test.fromLocalDatastore()
     test.limit = 1000
     // test.whereKey("objectId", equalTo: timeId)

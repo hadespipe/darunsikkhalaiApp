@@ -66,14 +66,10 @@ class timeTableM5: UIViewController {
             fridayDate.text = adaptDateString(-2+(count*7))
         default :
             print("Error")
-            
         }
+        
         let day:[String] = [mondayDate.text!,tuesdayDate.text!,wednesdayDate.text!,thursdayDate.text!,fridayDate.text!]
-        print(mondayDate.text)
-        print(day)
-        //การเปิดตารางเรียน
-        //โชว์คาบ
-        let subject = PFQuery(className: "Topic_Schedule")
+        let subject = PFQuery(className: "HT_Topic_Schedule")
         subject.fromLocalDatastore()
         subject.whereKey("Date", containedIn: day)
         subject.findObjectsInBackgroundWithBlock { (object, error) -> Void in
@@ -81,17 +77,23 @@ class timeTableM5: UIViewController {
                 if let objects = object{
                     print(objects.capacity)
                     for object in objects{
-                        //print(object)
+                        print(object)
                         //เปิดเวลา และ topicId
-                        let subjectObjectId = object["objectId"]
-                        let timeStart = object["Time_start"] as AnyObject
+                        let subjectObjectId = object.objectId!
                         
-                        let timeStop = object["Time_stop"] as! String
-                        let topicId = object["TopicID"]
+                        
+                        let timeStart = object["timeStartId"] as! String
+                        
+                        
+                        let timeStop = object["timeStopId"]  as! String
+                        
+                        let topicId = object["TopicId"]
                         let date = object["Date"]
+                        
+                        
                         //print(timeStart,timeStop,topicId)
-                        print("TimeStart = \(timeStart),TimeStop = \(timeStop)")
-                        let timeQuery = PFQuery(className: "Time_FK")
+                        print("TimeStart = \(timeStart),TimeStop = \(timeStop), TopicId = \(topicId)")
+                        let timeQuery = PFQuery(className: "HT_Time_FK")
                         timeQuery.fromLocalDatastore()
                         //timeQuery.whereKey("objectId", equalTo: timeStop)
                         timeQuery.findObjectsInBackgroundWithBlock({ (object, error) -> Void in
@@ -99,13 +101,13 @@ class timeTableM5: UIViewController {
                                 if let objects = object{
                                     //print(objects.capacity)
                                     for object in objects{
-                                        if (timeStart as! String as String) as String == object["objectId"] as! String{
+                                        if timeStart    == object.objectId!  {
                                             
                                             //อยู่คาบเช้า
                                             let period = timeConvert(object["Time"] as! String)
                                             //let endPeriod = timeConvert()
                                             
-                                            let topic = PFQuery(className: "Topic")
+                                            let topic = PFQuery(className: "HT_Topic")
                                             topic.fromLocalDatastore()
                                             //topic.whereKey("objectId", equalTo: topicId)
                                             topic.findObjectsInBackgroundWithBlock({ (object, error) -> Void in
@@ -113,20 +115,21 @@ class timeTableM5: UIViewController {
                                                     if let objects = object{
                                                         print(objects.capacity)
                                                         for object in objects{
-                                                            if object["objectId"] as! String == topicId as! String{
+                                                            if object.objectId! == topicId as! String{
                                                                 let topicName = object["Topic_Name"]
                                                                 
                                                                 let subjectCode = object["SubjectCode"]
-                                                                let subjectQuery = PFQuery(className: "Subject")
+                                                                let subjectQuery = PFQuery(className: "HT_Subject")
                                                                 subjectQuery.fromLocalDatastore()
                                                                 subjectQuery.findObjectsInBackgroundWithBlock({ (object, error) -> Void in
                                                                     if error == nil{
                                                                         if let objects = object{
                                                                             for object in objects{
-                                                                                if subjectCode as! String == object["objectId"] as! String{
-                                                                                    let classId = object["Class"] as! String
+                                                                                if subjectCode as! String == object.objectId! {
+                                                                                    print(object["Class"].objectId)
+                                                                                    let classId = object["Class"].objectId!
                                                                                     var theirClass = String()
-                                                                                    switch classId{
+                                                                                    switch classId!{
                                                                                     case "Jdr0Rowr8p":
                                                                                         theirClass = "m.6"
                                                                                     case "exv130NBiY":
@@ -139,46 +142,46 @@ class timeTableM5: UIViewController {
                                                                                     
                                                                                     
                                                                                     
-                                                                                    print("\(topicName) in (\(date)) is \(period) =  \(object["objectId"])   \(theirClass)")
-                                                                                    if self.mondayDate.text! == date as! String && theirClass == "m.6" && period == "M"{
+                                                                                    print("\(topicName) in (\(date)) is \(period) =  \(object.objectId)   \(theirClass)")
+                                                                                    if self.mondayDate.text! == date as! String && theirClass == "m.5" && period == "M"{
                                                                                         self.mondayClassMorning.setTitle(topicName as? String, forState: .Normal)
                                                                                     }
-                                                                                    else if self.mondayDate.text! == date as! String && theirClass == "m.6" && period == "A"{
+                                                                                    else if self.mondayDate.text! == date as! String && theirClass == "m.5" && period == "A"{
                                                                                         self.mondayClassAfternoon.setTitle(topicName as? String, forState: .Normal)
                                                                                     }
-                                                                                    else if self.tuesdayDate.text! == date as! String && theirClass == "m.6" && period == "M"{
+                                                                                    else if self.tuesdayDate.text! == date as! String && theirClass == "m.5" && period == "M"{
                                                                                         self.tuesdayClassMorning.setTitle(topicName as? String, forState: .Normal)
                                                                                     }
-                                                                                    else if self.tuesdayDate.text! == date as! String && theirClass == "m.6" && period == "A"{
+                                                                                    else if self.tuesdayDate.text! == date as! String && theirClass == "m.5" && period == "A"{
                                                                                         self.tuesdayClassAfternoon.setTitle(topicName as? String, forState: .Normal)
                                                                                     }
-                                                                                    else if self.wednesdayDate.text! == date as! String && theirClass == "m.6" && period == "M"{
+                                                                                    else if self.wednesdayDate.text! == date as! String && theirClass == "m.5" && period == "M"{
                                                                                         self.wednesdayClassMorning.setTitle(topicName as? String, forState: .Normal)
                                                                                     }
-                                                                                    else if self.wednesdayDate.text! == date as! String && theirClass == "m.6" && period == "A"{
+                                                                                    else if self.wednesdayDate.text! == date as! String && theirClass == "m.5" && period == "A"{
                                                                                         self.wednesdayClassAfternoon.setTitle(topicName as? String, forState: .Normal)
                                                                                     }
-                                                                                    else if self.thursdayDate.text! == date as! String && theirClass == "m.6" && period == "M"{
+                                                                                    else if self.thursdayDate.text! == date as! String && theirClass == "m.5" && period == "M"{
                                                                                         self.thursdayClassMorning.setTitle(topicName as? String, forState: .Normal)
                                                                                     }
-                                                                                    else if self.thursdayDate.text! == date as! String && theirClass == "m.6" && period == "A"{
+                                                                                    else if self.thursdayDate.text! == date as! String && theirClass == "m.5" && period == "A"{
                                                                                         self.thursdayClassAfternoon.setTitle(topicName as? String, forState: .Normal)
                                                                                     }
-                                                                                    else if self.fridayDate.text! == date as! String && theirClass == "m.6" && period == "M"{
+                                                                                    else if self.fridayDate.text! == date as! String && theirClass == "m.5" && period == "M"{
                                                                                         self.fridayClassMorning.setTitle(topicName as? String, forState: .Normal)
                                                                                     }
-                                                                                    else if self.fridayDate.text! == date as! String && theirClass == "m.6" && period == "A"{
+                                                                                    else if self.fridayDate.text! == date as! String && theirClass == "m.5" && period == "A"{
                                                                                         self.fridayClassAfternoon.setTitle(topicName as? String, forState: .Normal)
                                                                                     }
                                                                                     
                                                                                     //teacher
-                                                                                    let teacher = PFQuery(className: "Topic_Teacher")
+                                                                                    let teacher = PFQuery(className: "HT_Topic_Teacher")
                                                                                     teacher.fromLocalDatastore()
                                                                                     teacher.findObjectsInBackgroundWithBlock { (object, error) -> Void in
                                                                                         if error == nil{
                                                                                             if let objects = object{
                                                                                                 for object in objects{
-                                                                                                    if object["TopicScheduleID"] as! String == subjectObjectId as! String{
+                                                                                                    if object["TopicScheduleID"] as! String == subjectObjectId {
                                                                                                         let teacherId = object["Teacher"]
                                                                                                         let teacherUser = PFQuery(className: "User")
                                                                                                         teacherUser.fromLocalDatastore()
@@ -186,37 +189,37 @@ class timeTableM5: UIViewController {
                                                                                                             if error == nil{
                                                                                                                 if let objects = object{
                                                                                                                     for object in objects{
-                                                                                                                        if object["objectId"] as! String == teacherId as! String{
+                                                                                                                        if object.objectId!  == teacherId as! String{
                                                                                                                             print("I'm \(object["namelist"]) teach \(topicName)")
                                                                                                                             let teacherName = object["namelist"]
-                                                                                                                            if self.mondayDate.text! == date as! String && theirClass == "m.6" && period == "M"{
+                                                                                                                            if self.mondayDate.text! == date as! String && theirClass == "m.5" && period == "M"{
                                                                                                                                 self.mondayTeacherMorning.setTitle(teacherName as? String, forState: .Normal)
                                                                                                                             }
-                                                                                                                            else if self.mondayDate.text! == date as! String && theirClass == "m.6" && period == "A"{
+                                                                                                                            else if self.mondayDate.text! == date as! String && theirClass == "m.5" && period == "A"{
                                                                                                                                 self.mondayTeacherAfternoon.setTitle(teacherName as? String, forState: .Normal)
                                                                                                                             }
-                                                                                                                            else if self.tuesdayDate.text! == date as! String && theirClass == "m.6" && period == "M"{
+                                                                                                                            else if self.tuesdayDate.text! == date as! String && theirClass == "m.5" && period == "M"{
                                                                                                                                 self.tuesdayTeacherMorning.setTitle(teacherName as? String, forState: .Normal)
                                                                                                                             }
-                                                                                                                            else if self.tuesdayDate.text! == date as! String && theirClass == "m.6" && period == "A"{
+                                                                                                                            else if self.tuesdayDate.text! == date as! String && theirClass == "m.5" && period == "A"{
                                                                                                                                 self.tuesdayTeacherAfternoon.setTitle(teacherName as? String, forState: .Normal)
                                                                                                                             }
-                                                                                                                            else if self.wednesdayDate.text! == date as! String && theirClass == "m.6" && period == "M"{
+                                                                                                                            else if self.wednesdayDate.text! == date as! String && theirClass == "m.5" && period == "M"{
                                                                                                                                 self.wednesdayTeacherMorning.setTitle(teacherName as? String, forState: .Normal)
                                                                                                                             }
-                                                                                                                            else if self.wednesdayDate.text! == date as! String && theirClass == "m.6" && period == "A"{
+                                                                                                                            else if self.wednesdayDate.text! == date as! String && theirClass == "m.5" && period == "A"{
                                                                                                                                 self.wednesdayTeacherAfternoon.setTitle(teacherName as? String, forState: .Normal)
                                                                                                                             }
-                                                                                                                            else if self.thursdayDate.text! == date as! String && theirClass == "m.6" && period == "M"{
+                                                                                                                            else if self.thursdayDate.text! == date as! String && theirClass == "m.5" && period == "M"{
                                                                                                                                 self.thursdayTeacherMorning.setTitle(teacherName as? String, forState: .Normal)
                                                                                                                             }
-                                                                                                                            else if self.thursdayDate.text! == date as! String && theirClass == "m.6" && period == "A"{
+                                                                                                                            else if self.thursdayDate.text! == date as! String && theirClass == "m.5" && period == "A"{
                                                                                                                                 self.thursdayTeacherAfternoon.setTitle(teacherName as? String, forState: .Normal)
                                                                                                                             }
-                                                                                                                            else if self.fridayDate.text! == date as! String && theirClass == "m.6" && period == "M"{
+                                                                                                                            else if self.fridayDate.text! == date as! String && theirClass == "m.5" && period == "M"{
                                                                                                                                 self.fridayTeacherMorning.setTitle(teacherName as? String, forState: .Normal)
                                                                                                                             }
-                                                                                                                            else if self.fridayDate.text! == date as! String && theirClass == "m.6" && period == "A"{
+                                                                                                                            else if self.fridayDate.text! == date as! String && theirClass == "m.5" && period == "A"{
                                                                                                                                 self.fridayTeacherAfternoon.setTitle(teacherName as? String, forState: .Normal)
                                                                                                                             }
                                                                                                                             
@@ -263,10 +266,7 @@ class timeTableM5: UIViewController {
                 print(error)
             }
         }
-        
-        
-        viewDidLoad()
-        print(mondayDate.text)
+
         
     }
     @IBAction func previousButton(sender: AnyObject) {
@@ -328,7 +328,7 @@ class timeTableM5: UIViewController {
             print("Error")
         }
         let day:[String] = [mondayDate.text!,tuesdayDate.text!,wednesdayDate.text!,thursdayDate.text!,fridayDate.text!]
-        let subject = PFQuery(className: "Topic_Schedule")
+        let subject = PFQuery(className: "HT_Topic_Schedule")
         subject.fromLocalDatastore()
         subject.whereKey("Date", containedIn: day)
         subject.findObjectsInBackgroundWithBlock { (object, error) -> Void in
@@ -336,17 +336,23 @@ class timeTableM5: UIViewController {
                 if let objects = object{
                     print(objects.capacity)
                     for object in objects{
-                        //print(object)
+                        print(object)
                         //เปิดเวลา และ topicId
-                        let subjectObjectId = object["objectId"]
-                        let timeStart = object["Time_start"] as AnyObject
+                        let subjectObjectId = object.objectId!
                         
-                        let timeStop = object["Time_stop"] as! String
-                        let topicId = object["TopicID"]
+                        
+                        let timeStart = object["timeStartId"] as! String
+                        
+                        
+                        let timeStop = object["timeStopId"]  as! String
+                        
+                        let topicId = object["TopicId"]
                         let date = object["Date"]
+                        
+                        
                         //print(timeStart,timeStop,topicId)
-                        print("TimeStart = \(timeStart),TimeStop = \(timeStop)")
-                        let timeQuery = PFQuery(className: "Time_FK")
+                        print("TimeStart = \(timeStart),TimeStop = \(timeStop), TopicId = \(topicId)")
+                        let timeQuery = PFQuery(className: "HT_Time_FK")
                         timeQuery.fromLocalDatastore()
                         //timeQuery.whereKey("objectId", equalTo: timeStop)
                         timeQuery.findObjectsInBackgroundWithBlock({ (object, error) -> Void in
@@ -354,13 +360,13 @@ class timeTableM5: UIViewController {
                                 if let objects = object{
                                     //print(objects.capacity)
                                     for object in objects{
-                                        if (timeStart as! String as String) as String == object["objectId"] as! String{
+                                        if timeStart    == object.objectId!  {
                                             
                                             //อยู่คาบเช้า
                                             let period = timeConvert(object["Time"] as! String)
                                             //let endPeriod = timeConvert()
                                             
-                                            let topic = PFQuery(className: "Topic")
+                                            let topic = PFQuery(className: "HT_Topic")
                                             topic.fromLocalDatastore()
                                             //topic.whereKey("objectId", equalTo: topicId)
                                             topic.findObjectsInBackgroundWithBlock({ (object, error) -> Void in
@@ -368,20 +374,21 @@ class timeTableM5: UIViewController {
                                                     if let objects = object{
                                                         print(objects.capacity)
                                                         for object in objects{
-                                                            if object["objectId"] as! String == topicId as! String{
+                                                            if object.objectId! == topicId as! String{
                                                                 let topicName = object["Topic_Name"]
                                                                 
                                                                 let subjectCode = object["SubjectCode"]
-                                                                let subjectQuery = PFQuery(className: "Subject")
+                                                                let subjectQuery = PFQuery(className: "HT_Subject")
                                                                 subjectQuery.fromLocalDatastore()
                                                                 subjectQuery.findObjectsInBackgroundWithBlock({ (object, error) -> Void in
                                                                     if error == nil{
                                                                         if let objects = object{
                                                                             for object in objects{
-                                                                                if subjectCode as! String == object["objectId"] as! String{
-                                                                                    let classId = object["Class"] as! String
+                                                                                if subjectCode as! String == object.objectId! {
+                                                                                    print(object["Class"].objectId)
+                                                                                    let classId = object["Class"].objectId!
                                                                                     var theirClass = String()
-                                                                                    switch classId{
+                                                                                    switch classId!{
                                                                                     case "Jdr0Rowr8p":
                                                                                         theirClass = "m.6"
                                                                                     case "exv130NBiY":
@@ -394,46 +401,46 @@ class timeTableM5: UIViewController {
                                                                                     
                                                                                     
                                                                                     
-                                                                                    print("\(topicName) in (\(date)) is \(period) =  \(object["objectId"])   \(theirClass)")
-                                                                                    if self.mondayDate.text! == date as! String && theirClass == "m.6" && period == "M"{
+                                                                                    print("\(topicName) in (\(date)) is \(period) =  \(object.objectId)   \(theirClass)")
+                                                                                    if self.mondayDate.text! == date as! String && theirClass == "m.5" && period == "M"{
                                                                                         self.mondayClassMorning.setTitle(topicName as? String, forState: .Normal)
                                                                                     }
-                                                                                    else if self.mondayDate.text! == date as! String && theirClass == "m.6" && period == "A"{
+                                                                                    else if self.mondayDate.text! == date as! String && theirClass == "m.5" && period == "A"{
                                                                                         self.mondayClassAfternoon.setTitle(topicName as? String, forState: .Normal)
                                                                                     }
-                                                                                    else if self.tuesdayDate.text! == date as! String && theirClass == "m.6" && period == "M"{
+                                                                                    else if self.tuesdayDate.text! == date as! String && theirClass == "m.5" && period == "M"{
                                                                                         self.tuesdayClassMorning.setTitle(topicName as? String, forState: .Normal)
                                                                                     }
-                                                                                    else if self.tuesdayDate.text! == date as! String && theirClass == "m.6" && period == "A"{
+                                                                                    else if self.tuesdayDate.text! == date as! String && theirClass == "m.5" && period == "A"{
                                                                                         self.tuesdayClassAfternoon.setTitle(topicName as? String, forState: .Normal)
                                                                                     }
-                                                                                    else if self.wednesdayDate.text! == date as! String && theirClass == "m.6" && period == "M"{
+                                                                                    else if self.wednesdayDate.text! == date as! String && theirClass == "m.5" && period == "M"{
                                                                                         self.wednesdayClassMorning.setTitle(topicName as? String, forState: .Normal)
                                                                                     }
-                                                                                    else if self.wednesdayDate.text! == date as! String && theirClass == "m.6" && period == "A"{
+                                                                                    else if self.wednesdayDate.text! == date as! String && theirClass == "m.5" && period == "A"{
                                                                                         self.wednesdayClassAfternoon.setTitle(topicName as? String, forState: .Normal)
                                                                                     }
-                                                                                    else if self.thursdayDate.text! == date as! String && theirClass == "m.6" && period == "M"{
+                                                                                    else if self.thursdayDate.text! == date as! String && theirClass == "m.5" && period == "M"{
                                                                                         self.thursdayClassMorning.setTitle(topicName as? String, forState: .Normal)
                                                                                     }
-                                                                                    else if self.thursdayDate.text! == date as! String && theirClass == "m.6" && period == "A"{
+                                                                                    else if self.thursdayDate.text! == date as! String && theirClass == "m.5" && period == "A"{
                                                                                         self.thursdayClassAfternoon.setTitle(topicName as? String, forState: .Normal)
                                                                                     }
-                                                                                    else if self.fridayDate.text! == date as! String && theirClass == "m.6" && period == "M"{
+                                                                                    else if self.fridayDate.text! == date as! String && theirClass == "m.5" && period == "M"{
                                                                                         self.fridayClassMorning.setTitle(topicName as? String, forState: .Normal)
                                                                                     }
-                                                                                    else if self.fridayDate.text! == date as! String && theirClass == "m.6" && period == "A"{
+                                                                                    else if self.fridayDate.text! == date as! String && theirClass == "m.5" && period == "A"{
                                                                                         self.fridayClassAfternoon.setTitle(topicName as? String, forState: .Normal)
                                                                                     }
                                                                                     
                                                                                     //teacher
-                                                                                    let teacher = PFQuery(className: "Topic_Teacher")
+                                                                                    let teacher = PFQuery(className: "HT_Topic_Teacher")
                                                                                     teacher.fromLocalDatastore()
                                                                                     teacher.findObjectsInBackgroundWithBlock { (object, error) -> Void in
                                                                                         if error == nil{
                                                                                             if let objects = object{
                                                                                                 for object in objects{
-                                                                                                    if object["TopicScheduleID"] as! String == subjectObjectId as! String{
+                                                                                                    if object["TopicScheduleID"] as! String == subjectObjectId {
                                                                                                         let teacherId = object["Teacher"]
                                                                                                         let teacherUser = PFQuery(className: "User")
                                                                                                         teacherUser.fromLocalDatastore()
@@ -441,37 +448,37 @@ class timeTableM5: UIViewController {
                                                                                                             if error == nil{
                                                                                                                 if let objects = object{
                                                                                                                     for object in objects{
-                                                                                                                        if object["objectId"] as! String == teacherId as! String{
+                                                                                                                        if object.objectId!  == teacherId as! String{
                                                                                                                             print("I'm \(object["namelist"]) teach \(topicName)")
                                                                                                                             let teacherName = object["namelist"]
-                                                                                                                            if self.mondayDate.text! == date as! String && theirClass == "m.6" && period == "M"{
+                                                                                                                            if self.mondayDate.text! == date as! String && theirClass == "m.5" && period == "M"{
                                                                                                                                 self.mondayTeacherMorning.setTitle(teacherName as? String, forState: .Normal)
                                                                                                                             }
-                                                                                                                            else if self.mondayDate.text! == date as! String && theirClass == "m.6" && period == "A"{
+                                                                                                                            else if self.mondayDate.text! == date as! String && theirClass == "m.5" && period == "A"{
                                                                                                                                 self.mondayTeacherAfternoon.setTitle(teacherName as? String, forState: .Normal)
                                                                                                                             }
-                                                                                                                            else if self.tuesdayDate.text! == date as! String && theirClass == "m.6" && period == "M"{
+                                                                                                                            else if self.tuesdayDate.text! == date as! String && theirClass == "m.5" && period == "M"{
                                                                                                                                 self.tuesdayTeacherMorning.setTitle(teacherName as? String, forState: .Normal)
                                                                                                                             }
-                                                                                                                            else if self.tuesdayDate.text! == date as! String && theirClass == "m.6" && period == "A"{
+                                                                                                                            else if self.tuesdayDate.text! == date as! String && theirClass == "m.5" && period == "A"{
                                                                                                                                 self.tuesdayTeacherAfternoon.setTitle(teacherName as? String, forState: .Normal)
                                                                                                                             }
-                                                                                                                            else if self.wednesdayDate.text! == date as! String && theirClass == "m.6" && period == "M"{
+                                                                                                                            else if self.wednesdayDate.text! == date as! String && theirClass == "m.5" && period == "M"{
                                                                                                                                 self.wednesdayTeacherMorning.setTitle(teacherName as? String, forState: .Normal)
                                                                                                                             }
-                                                                                                                            else if self.wednesdayDate.text! == date as! String && theirClass == "m.6" && period == "A"{
+                                                                                                                            else if self.wednesdayDate.text! == date as! String && theirClass == "m.5" && period == "A"{
                                                                                                                                 self.wednesdayTeacherAfternoon.setTitle(teacherName as? String, forState: .Normal)
                                                                                                                             }
-                                                                                                                            else if self.thursdayDate.text! == date as! String && theirClass == "m.6" && period == "M"{
+                                                                                                                            else if self.thursdayDate.text! == date as! String && theirClass == "m.5" && period == "M"{
                                                                                                                                 self.thursdayTeacherMorning.setTitle(teacherName as? String, forState: .Normal)
                                                                                                                             }
-                                                                                                                            else if self.thursdayDate.text! == date as! String && theirClass == "m.6" && period == "A"{
+                                                                                                                            else if self.thursdayDate.text! == date as! String && theirClass == "m.5" && period == "A"{
                                                                                                                                 self.thursdayTeacherAfternoon.setTitle(teacherName as? String, forState: .Normal)
                                                                                                                             }
-                                                                                                                            else if self.fridayDate.text! == date as! String && theirClass == "m.6" && period == "M"{
+                                                                                                                            else if self.fridayDate.text! == date as! String && theirClass == "m.5" && period == "M"{
                                                                                                                                 self.fridayTeacherMorning.setTitle(teacherName as? String, forState: .Normal)
                                                                                                                             }
-                                                                                                                            else if self.fridayDate.text! == date as! String && theirClass == "m.6" && period == "A"{
+                                                                                                                            else if self.fridayDate.text! == date as! String && theirClass == "m.5" && period == "A"{
                                                                                                                                 self.fridayTeacherAfternoon.setTitle(teacherName as? String, forState: .Normal)
                                                                                                                             }
                                                                                                                             
@@ -518,7 +525,6 @@ class timeTableM5: UIViewController {
                 print(error)
             }
         }
-        
     }
 
     
@@ -608,7 +614,8 @@ class timeTableM5: UIViewController {
         print(day)
         //การเปิดตารางเรียน
         //โชว์คาบ
-        let subject = PFQuery(className: "Topic_Schedule")
+        
+        let subject = PFQuery(className: "HT_Topic_Schedule")
         subject.fromLocalDatastore()
         subject.whereKey("Date", containedIn: day)
         subject.findObjectsInBackgroundWithBlock { (object, error) -> Void in
@@ -616,17 +623,23 @@ class timeTableM5: UIViewController {
                 if let objects = object{
                     print(objects.capacity)
                     for object in objects{
-                        //print(object)
+                        print(object)
                         //เปิดเวลา และ topicId
-                        let subjectObjectId = object["objectId"]
-                        let timeStart = object["Time_start"] as AnyObject
+                        let subjectObjectId = object.objectId!
                         
-                        let timeStop = object["Time_stop"] as! String
-                        let topicId = object["TopicID"]
+                        
+                        let timeStart = object["timeStartId"] as! String
+                        
+                        
+                        let timeStop = object["timeStopId"]  as! String
+                        
+                        let topicId = object["TopicId"]
                         let date = object["Date"]
+                        
+                        
                         //print(timeStart,timeStop,topicId)
-                        print("TimeStart = \(timeStart),TimeStop = \(timeStop)")
-                        let timeQuery = PFQuery(className: "Time_FK")
+                        print("TimeStart = \(timeStart),TimeStop = \(timeStop), TopicId = \(topicId)")
+                        let timeQuery = PFQuery(className: "HT_Time_FK")
                         timeQuery.fromLocalDatastore()
                         //timeQuery.whereKey("objectId", equalTo: timeStop)
                         timeQuery.findObjectsInBackgroundWithBlock({ (object, error) -> Void in
@@ -634,13 +647,13 @@ class timeTableM5: UIViewController {
                                 if let objects = object{
                                     //print(objects.capacity)
                                     for object in objects{
-                                        if (timeStart as! String as String) as String == object["objectId"] as! String{
+                                        if timeStart    == object.objectId!  {
                                             
                                             //อยู่คาบเช้า
                                             let period = timeConvert(object["Time"] as! String)
                                             //let endPeriod = timeConvert()
                                             
-                                            let topic = PFQuery(className: "Topic")
+                                            let topic = PFQuery(className: "HT_Topic")
                                             topic.fromLocalDatastore()
                                             //topic.whereKey("objectId", equalTo: topicId)
                                             topic.findObjectsInBackgroundWithBlock({ (object, error) -> Void in
@@ -648,20 +661,21 @@ class timeTableM5: UIViewController {
                                                     if let objects = object{
                                                         print(objects.capacity)
                                                         for object in objects{
-                                                            if object["objectId"] as! String == topicId as! String{
+                                                            if object.objectId! == topicId as! String{
                                                                 let topicName = object["Topic_Name"]
                                                                 
                                                                 let subjectCode = object["SubjectCode"]
-                                                                let subjectQuery = PFQuery(className: "Subject")
+                                                                let subjectQuery = PFQuery(className: "HT_Subject")
                                                                 subjectQuery.fromLocalDatastore()
                                                                 subjectQuery.findObjectsInBackgroundWithBlock({ (object, error) -> Void in
                                                                     if error == nil{
                                                                         if let objects = object{
                                                                             for object in objects{
-                                                                                if subjectCode as! String == object["objectId"] as! String{
-                                                                                    let classId = object["Class"] as! String
+                                                                                if subjectCode as! String == object.objectId! {
+                                                                                    print(object["Class"].objectId)
+                                                                                    let classId = object["Class"].objectId!
                                                                                     var theirClass = String()
-                                                                                    switch classId{
+                                                                                    switch classId!{
                                                                                     case "Jdr0Rowr8p":
                                                                                         theirClass = "m.6"
                                                                                     case "exv130NBiY":
@@ -674,46 +688,46 @@ class timeTableM5: UIViewController {
                                                                                     
                                                                                     
                                                                                     
-                                                                                    print("\(topicName) in (\(date)) is \(period) =  \(object["objectId"])   \(theirClass)")
-                                                                                    if self.mondayDate.text! == date as! String && theirClass == "m.6" && period == "M"{
+                                                                                    print("\(topicName) in (\(date)) is \(period) =  \(object.objectId)   \(theirClass)")
+                                                                                    if self.mondayDate.text! == date as! String && theirClass == "m.5" && period == "M"{
                                                                                         self.mondayClassMorning.setTitle(topicName as? String, forState: .Normal)
                                                                                     }
-                                                                                    else if self.mondayDate.text! == date as! String && theirClass == "m.6" && period == "A"{
+                                                                                    else if self.mondayDate.text! == date as! String && theirClass == "m.5" && period == "A"{
                                                                                         self.mondayClassAfternoon.setTitle(topicName as? String, forState: .Normal)
                                                                                     }
-                                                                                    else if self.tuesdayDate.text! == date as! String && theirClass == "m.6" && period == "M"{
+                                                                                    else if self.tuesdayDate.text! == date as! String && theirClass == "m.5" && period == "M"{
                                                                                         self.tuesdayClassMorning.setTitle(topicName as? String, forState: .Normal)
                                                                                     }
-                                                                                    else if self.tuesdayDate.text! == date as! String && theirClass == "m.6" && period == "A"{
+                                                                                    else if self.tuesdayDate.text! == date as! String && theirClass == "m.5" && period == "A"{
                                                                                         self.tuesdayClassAfternoon.setTitle(topicName as? String, forState: .Normal)
                                                                                     }
-                                                                                    else if self.wednesdayDate.text! == date as! String && theirClass == "m.6" && period == "M"{
+                                                                                    else if self.wednesdayDate.text! == date as! String && theirClass == "m.5" && period == "M"{
                                                                                         self.wednesdayClassMorning.setTitle(topicName as? String, forState: .Normal)
                                                                                     }
-                                                                                    else if self.wednesdayDate.text! == date as! String && theirClass == "m.6" && period == "A"{
+                                                                                    else if self.wednesdayDate.text! == date as! String && theirClass == "m.5" && period == "A"{
                                                                                         self.wednesdayClassAfternoon.setTitle(topicName as? String, forState: .Normal)
                                                                                     }
-                                                                                    else if self.thursdayDate.text! == date as! String && theirClass == "m.6" && period == "M"{
+                                                                                    else if self.thursdayDate.text! == date as! String && theirClass == "m.5" && period == "M"{
                                                                                         self.thursdayClassMorning.setTitle(topicName as? String, forState: .Normal)
                                                                                     }
-                                                                                    else if self.thursdayDate.text! == date as! String && theirClass == "m.6" && period == "A"{
+                                                                                    else if self.thursdayDate.text! == date as! String && theirClass == "m.5" && period == "A"{
                                                                                         self.thursdayClassAfternoon.setTitle(topicName as? String, forState: .Normal)
                                                                                     }
-                                                                                    else if self.fridayDate.text! == date as! String && theirClass == "m.6" && period == "M"{
+                                                                                    else if self.fridayDate.text! == date as! String && theirClass == "m.5" && period == "M"{
                                                                                         self.fridayClassMorning.setTitle(topicName as? String, forState: .Normal)
                                                                                     }
-                                                                                    else if self.fridayDate.text! == date as! String && theirClass == "m.6" && period == "A"{
+                                                                                    else if self.fridayDate.text! == date as! String && theirClass == "m.5" && period == "A"{
                                                                                         self.fridayClassAfternoon.setTitle(topicName as? String, forState: .Normal)
                                                                                     }
                                                                                     
                                                                                     //teacher
-                                                                                    let teacher = PFQuery(className: "Topic_Teacher")
+                                                                                    let teacher = PFQuery(className: "HT_Topic_Teacher")
                                                                                     teacher.fromLocalDatastore()
                                                                                     teacher.findObjectsInBackgroundWithBlock { (object, error) -> Void in
                                                                                         if error == nil{
                                                                                             if let objects = object{
                                                                                                 for object in objects{
-                                                                                                    if object["TopicScheduleID"] as! String == subjectObjectId as! String{
+                                                                                                    if object["TopicScheduleID"] as! String == subjectObjectId {
                                                                                                         let teacherId = object["Teacher"]
                                                                                                         let teacherUser = PFQuery(className: "User")
                                                                                                         teacherUser.fromLocalDatastore()
@@ -721,37 +735,37 @@ class timeTableM5: UIViewController {
                                                                                                             if error == nil{
                                                                                                                 if let objects = object{
                                                                                                                     for object in objects{
-                                                                                                                        if object["objectId"] as! String == teacherId as! String{
+                                                                                                                        if object.objectId!  == teacherId as! String{
                                                                                                                             print("I'm \(object["namelist"]) teach \(topicName)")
                                                                                                                             let teacherName = object["namelist"]
-                                                                                                                            if self.mondayDate.text! == date as! String && theirClass == "m.6" && period == "M"{
+                                                                                                                            if self.mondayDate.text! == date as! String && theirClass == "m.5" && period == "M"{
                                                                                                                                 self.mondayTeacherMorning.setTitle(teacherName as? String, forState: .Normal)
                                                                                                                             }
-                                                                                                                            else if self.mondayDate.text! == date as! String && theirClass == "m.6" && period == "A"{
+                                                                                                                            else if self.mondayDate.text! == date as! String && theirClass == "m.5" && period == "A"{
                                                                                                                                 self.mondayTeacherAfternoon.setTitle(teacherName as? String, forState: .Normal)
                                                                                                                             }
-                                                                                                                            else if self.tuesdayDate.text! == date as! String && theirClass == "m.6" && period == "M"{
+                                                                                                                            else if self.tuesdayDate.text! == date as! String && theirClass == "m.5" && period == "M"{
                                                                                                                                 self.tuesdayTeacherMorning.setTitle(teacherName as? String, forState: .Normal)
                                                                                                                             }
-                                                                                                                            else if self.tuesdayDate.text! == date as! String && theirClass == "m.6" && period == "A"{
+                                                                                                                            else if self.tuesdayDate.text! == date as! String && theirClass == "m.5" && period == "A"{
                                                                                                                                 self.tuesdayTeacherAfternoon.setTitle(teacherName as? String, forState: .Normal)
                                                                                                                             }
-                                                                                                                            else if self.wednesdayDate.text! == date as! String && theirClass == "m.6" && period == "M"{
+                                                                                                                            else if self.wednesdayDate.text! == date as! String && theirClass == "m.5" && period == "M"{
                                                                                                                                 self.wednesdayTeacherMorning.setTitle(teacherName as? String, forState: .Normal)
                                                                                                                             }
-                                                                                                                            else if self.wednesdayDate.text! == date as! String && theirClass == "m.6" && period == "A"{
+                                                                                                                            else if self.wednesdayDate.text! == date as! String && theirClass == "m.5" && period == "A"{
                                                                                                                                 self.wednesdayTeacherAfternoon.setTitle(teacherName as? String, forState: .Normal)
                                                                                                                             }
-                                                                                                                            else if self.thursdayDate.text! == date as! String && theirClass == "m.6" && period == "M"{
+                                                                                                                            else if self.thursdayDate.text! == date as! String && theirClass == "m.5" && period == "M"{
                                                                                                                                 self.thursdayTeacherMorning.setTitle(teacherName as? String, forState: .Normal)
                                                                                                                             }
-                                                                                                                            else if self.thursdayDate.text! == date as! String && theirClass == "m.6" && period == "A"{
+                                                                                                                            else if self.thursdayDate.text! == date as! String && theirClass == "m.5" && period == "A"{
                                                                                                                                 self.thursdayTeacherAfternoon.setTitle(teacherName as? String, forState: .Normal)
                                                                                                                             }
-                                                                                                                            else if self.fridayDate.text! == date as! String && theirClass == "m.6" && period == "M"{
+                                                                                                                            else if self.fridayDate.text! == date as! String && theirClass == "m.5" && period == "M"{
                                                                                                                                 self.fridayTeacherMorning.setTitle(teacherName as? String, forState: .Normal)
                                                                                                                             }
-                                                                                                                            else if self.fridayDate.text! == date as! String && theirClass == "m.6" && period == "A"{
+                                                                                                                            else if self.fridayDate.text! == date as! String && theirClass == "m.5" && period == "A"{
                                                                                                                                 self.fridayTeacherAfternoon.setTitle(teacherName as? String, forState: .Normal)
                                                                                                                             }
                                                                                                                             
@@ -798,11 +812,6 @@ class timeTableM5: UIViewController {
                 print(error)
             }
         }
-        
-        
-        
-        
-        
     }
     
     
