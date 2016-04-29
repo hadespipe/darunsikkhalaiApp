@@ -165,7 +165,7 @@ class threeMView: UIViewController{
                                                                                                                     for object in objects{
                                                                                                                         if object.objectId!  == teacherId as! String{
                                                                                                                             print("I'm \(object["namelist"]) teach \(topicName)")
-                                                                                                                            let teacherName = object["namelist"]
+                                                                                                                            //let teacherName = object["namelist"]
                                                                                                                             
                                                                                                                             //M.6
                                                                                                                             if self.mondayDate.text! == date as! String && theirClass == "m.6" && period == "M"{

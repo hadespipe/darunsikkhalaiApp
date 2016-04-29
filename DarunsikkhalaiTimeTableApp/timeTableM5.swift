@@ -580,6 +580,63 @@ class timeTableM5: UIViewController {
         //        print(user)
         super.viewWillAppear(true)
         
+        let today = NSDate()
+        let todayFormatter = NSDateFormatter()
+        todayFormatter.dateFormat = "dd-MM-yyyy"
+        _ = todayFormatter.stringFromDate(today)
+        let todayFormatterCheck = NSDateFormatter()
+        todayFormatterCheck.dateFormat = "E"
+        let todayCheckString = todayFormatterCheck.stringFromDate(today)
+        _ = NSCalendar.currentCalendar().components(NSCalendarUnit.Month, fromDate: today)
+        
+        switch(todayCheckString){
+        case "Mon" :
+            mondayDate.text = adaptDateString(0+(count*7))
+            tuesdayDate.text = adaptDateString(1+(count*7))
+            wednesdayDate.text = adaptDateString(2+(count*7))
+            thursdayDate.text = adaptDateString(3+(count*7))
+            fridayDate.text = adaptDateString(4+(count*7))
+        case "Tue" :
+            mondayDate.text = adaptDateString(-1+(count*7))
+            tuesdayDate.text = adaptDateString(0+(count*7))
+            wednesdayDate.text = adaptDateString(+1+(count*7))
+            thursdayDate.text = adaptDateString(2+(count*7))
+            fridayDate.text = adaptDateString(3+(count*7))
+        case "Wed" :
+            mondayDate.text = adaptDateString(-2+(count*7))
+            tuesdayDate.text = adaptDateString(-1+(count*7))
+            wednesdayDate.text = adaptDateString(0+(count*7))
+            thursdayDate.text = adaptDateString(1+(count*7))
+            fridayDate.text = adaptDateString(2+(count*7))
+        case "Thu" :
+            mondayDate.text = adaptDateString(-3+(count*7))
+            tuesdayDate.text = adaptDateString(-2+(count*7))
+            wednesdayDate.text = adaptDateString(-1+(count*7))
+            thursdayDate.text = adaptDateString(0+(count*7))
+            fridayDate.text = adaptDateString(1+(count*7))
+        case "Fri" :
+            mondayDate.text = adaptDateString(-4+(count*7))
+            tuesdayDate.text = adaptDateString(-3+(count*7))
+            wednesdayDate.text = adaptDateString(-2+(count*7))
+            thursdayDate.text = adaptDateString(-1+(count*7))
+            fridayDate.text = adaptDateString(0+(count*7))
+        case "Sat" :
+            mondayDate.text = adaptDateString(-5+(count*7))
+            tuesdayDate.text = adaptDateString(-4+(count*7))
+            wednesdayDate.text = adaptDateString(-3+(count*7))
+            thursdayDate.text = adaptDateString(-2+(count*7))
+            fridayDate.text = adaptDateString(-1+(count*7))
+        case "Sun" :
+            mondayDate.text = adaptDateString(-6+(count*7))
+            tuesdayDate.text = adaptDateString(-5+(count*7))
+            wednesdayDate.text = adaptDateString(-4+(count*7))
+            thursdayDate.text = adaptDateString(-3+(count*7))
+            fridayDate.text = adaptDateString(-2+(count*7))
+        default :
+            print("Error")
+        }
+
+        
         let day:[String] = [mondayDate.text!,tuesdayDate.text!,wednesdayDate.text!,thursdayDate.text!,fridayDate.text!]
         //        subjectThisWeek(day) { (objectId, date, timeStartId, timeStopId,topicId) -> Void in
         //            print(objectId, date, timeStartId, timeStopId,topicId)
@@ -623,7 +680,7 @@ class timeTableM5: UIViewController {
                 if let objects = object{
                     print(objects.capacity)
                     for object in objects{
-                        print(object)
+                        //print(object)
                         //เปิดเวลา และ topicId
                         let subjectObjectId = object.objectId!
                         
@@ -631,14 +688,14 @@ class timeTableM5: UIViewController {
                         let timeStart = object["timeStartId"] as! String
                         
                         
-                        let timeStop = object["timeStopId"]  as! String
+                       // let timeStop = object["timeStopId"]  as! String
                         
                         let topicId = object["TopicId"]
                         let date = object["Date"]
                         
                         
                         //print(timeStart,timeStop,topicId)
-                        print("TimeStart = \(timeStart),TimeStop = \(timeStop), TopicId = \(topicId)")
+                        //print("TimeStart = \(timeStart),TimeStop = \(timeStop), TopicId = \(topicId)")
                         let timeQuery = PFQuery(className: "HT_Time_FK")
                         timeQuery.fromLocalDatastore()
                         //timeQuery.whereKey("objectId", equalTo: timeStop)
@@ -659,7 +716,7 @@ class timeTableM5: UIViewController {
                                             topic.findObjectsInBackgroundWithBlock({ (object, error) -> Void in
                                                 if error == nil{
                                                     if let objects = object{
-                                                        print(objects.capacity)
+                                                        //print(objects.capacity)
                                                         for object in objects{
                                                             if object.objectId! == topicId as! String{
                                                                 let topicName = object["Topic_Name"]
@@ -672,7 +729,7 @@ class timeTableM5: UIViewController {
                                                                         if let objects = object{
                                                                             for object in objects{
                                                                                 if subjectCode as! String == object.objectId! {
-                                                                                    print(object["Class"].objectId)
+                                                                                    //print(object["Class"].objectId)
                                                                                     let classId = object["Class"].objectId!
                                                                                     var theirClass = String()
                                                                                     switch classId!{
